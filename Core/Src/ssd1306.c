@@ -38,7 +38,7 @@ void SSD1306_Init(void)
     SSD1306_WriteCommand(0x40);
 
     SSD1306_WriteCommand(0xA0);
-    SSD1306_WriteCommand(0xA1);
+    // SSD1306_WriteCommand(0xA1);
 
     SSD1306_WriteCommand(0xC0);
 
