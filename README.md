@@ -48,8 +48,8 @@ STM32 HAL 라이브러리를 기반으로 작성되었으며, Frame Buffer 방�
   - [x] `SSD1306_Fill()`: 화면 클리어 및 채우기
 - [x] **Graphic Primitives**
   - [x] `SSD1306_DrawPixel()`: 좌표 기반 픽셀 제어
-  - [ ] `SSD1306_DrawLine()`: 선 그리기
-  - [ ] `SSD1306_DrawRect()`: 사각형 그리기
+  - [x] `SSD1306_DrawLine()`: 선 그리기
+  - [x] `SSD1306_DrawRect()`: 사각형 그리기
 - [ ] **Typography**
   - [ ] `SSD1306_SetCursor()`: 텍스트 커서 위치 설정
   - [ ] `SSD1306_WriteChar()`: ASCII 폰트(5x7) 출력
