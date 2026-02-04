@@ -91,11 +91,18 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+
   SSD1306_Init();
   HAL_Delay(50);
-  SSD1306_Fill(1);
+  SSD1306_Fill(0);
 
+  // 테스트용 코드
+  // SSD1306_DrawVLine(10, 0, 10, 1);
+  // SSD1306_DrawFilledRect(0, 0, 30, 30, 1);
+  // SSD1306_DrawRect(50, 30, 50, 10, 1);
   // SSD1306_DrawPixel(32, 10, 1);
+  // SSD1306_DrawLine(0, 0, 127, 63, 1);
+
   SSD1306_UpdateScreen();
   /* USER CODE END 2 */
 

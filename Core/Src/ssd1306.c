@@ -87,12 +87,77 @@ void SSD1306_DrawPixel(uint8_t x, uint8_t y, uint8_t color)
     (color == 1) ? (SSD1306_Buffer[y >> 3][x] |= (1 << (y % 8))) : (SSD1306_Buffer[y >> 3][x] &= ~(1 << (y % 8)));
 }
 
+void SSD1306_DrawHLine(uint8_t x, uint8_t y, uint8_t width, uint8_t color)
+{
+    for(int i = 0; i < width; i++){
+        SSD1306_DrawPixel(x + i, y, color);
+    }
+}
+
+void SSD1306_DrawVLine(uint8_t x, uint8_t y, uint8_t height, uint8_t color)
+{
+    for(int i = 0; i < height; i++){
+            SSD1306_DrawPixel(x, y + i, color);
+        }
+}
+
 void SSD1306_DrawLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t color)
 {
+    if(y0 == y1){
+        if(x0 > x1){
+            uint8_t temp = x1;
+            x1 = x0;
+            x0 = temp;
+        }
+        SSD1306_DrawHLine(x0, y0, x1 -x0 + 1, color);
 
+    }
+
+    if(x0 == x1){
+        if(y0 > y1){
+            uint8_t temp = y1;
+            y1 = y0;
+            y0 = temp;
+        }
+        SSD1306_DrawVLine(x0, y0, y1 -y0 + 1, color);
+    }
+    int16_t dx = abs(x1 - x0);
+    int16_t dy = abs(y1 - y0);
+    
+    int16_t sx = (x0 < x1) ? 1 : -1;
+    int16_t sy = (y0 < y1) ? 1 : -1;
+    
+    int16_t err = dx - dy; 
+    
+    while(1) {
+        SSD1306_DrawPixel(x0, y0, color);
+        if(x0 == x1 && y0 == y1) break;
+        
+        int16_t e2 = 2 * err; 
+
+        if(e2 > -dy) {
+            err -= dy;
+            x0 += sx;
+        }
+        
+        if(e2 < dx) {
+            err += dx;
+            y0 += sy;
+        }
+    }
 }
 
 void SSD1306_DrawRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color)
 {
-    
+    SSD1306_DrawHLine(x, y, width, color);
+    SSD1306_DrawHLine(x, y + height - 1, width, color);
+    SSD1306_DrawVLine(x, y, height, color);
+    SSD1306_DrawVLine(x + width - 1, y, height, color);
+}
+
+void SSD1306_DrawFilledRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color)
+{
+    for(int i = 0; i < height; i++){
+        SSD1306_DrawHLine(x, y+i, width, color);
+    }
 }
