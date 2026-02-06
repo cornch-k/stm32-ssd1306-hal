@@ -50,10 +50,15 @@ STM32 HAL 라이브러리를 기반으로 작성되었으며, Frame Buffer 방�
   - [x] `SSD1306_DrawPixel()`: 좌표 기반 픽셀 제어
   - [x] `SSD1306_DrawLine()`: 선 그리기
   - [x] `SSD1306_DrawRect()`: 사각형 그리기
-- [ ] **Typography**
-  - [ ] `SSD1306_SetCursor()`: 텍스트 커서 위치 설정
-  - [ ] `SSD1306_WriteChar()`: ASCII 폰트(5x7) 출력
-  - [ ] `SSD1306_WriteString()`: 문자열 출력
+- [x] **Typography**
+  - [x] `SSD1306_SetCursor()`: 텍스트 커서 위치 설정
+  - [x] `SSD1306_WriteChar()`: 폰트(ASCII, 한글 지원) 출력
+  - [x] `SSD1306_WriteString()`: 문자열 출력
+
+## 🖥️ Picture
+
+한글과 영어 혼용이 가능합니다. 만약 한 줄 내에 모두 표기가 불가할 경우, 다음 줄에 나머지 내용이 표기됩니다.
+![OLED Hello World Display](result/IMG_2036.jpg)
 
 ## 📝 Example
 
@@ -65,6 +70,7 @@ STM32 HAL 라이브러리를 기반으로 작성되었으며, Frame Buffer 방�
 #include "gpio.h"
 #include "stdbool.h"
 #include "ssd1306.h"
+#include "ssd1306_font.h"
 
 int main(void)
 {
@@ -83,6 +89,13 @@ int main(void)
 
     /* Draw a Pixel at center */
     SSD1306_DrawPixel(64, 32, 1);
+
+    /* Set Text Cursor */
+    SSD1306_SetCursor(0, 0);
+
+    /* Draw a text */
+    SSD1306_WriteString("Hello, World!\n", 1);
+    SSD1306_WriteString("다람쥐 헌 쳇바퀴에 타고파\n", 1);
 
     /* Update Display */
     SSD1306_UpdateScreen();

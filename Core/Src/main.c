@@ -22,6 +22,8 @@
 #include "usart.h"
 #include "gpio.h"
 #include "stdbool.h"
+#include "ssd1306.h"
+#include "ssd1306_font.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -102,7 +104,9 @@ int main(void)
   // SSD1306_DrawRect(50, 30, 50, 10, 1);
   // SSD1306_DrawPixel(32, 10, 1);
   // SSD1306_DrawLine(0, 0, 127, 63, 1);
-
+  SSD1306_SetCursor(0, 0);
+  SSD1306_WriteString("Hello, World!\n", 1);
+  SSD1306_WriteString("다람쥐 헌 쳇바퀴에 타고파\n", 1);
   SSD1306_UpdateScreen();
   /* USER CODE END 2 */
 

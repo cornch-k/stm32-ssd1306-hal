@@ -21,8 +21,4 @@ void SSD1306_DrawLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, uint8_t co
 void SSD1306_DrawRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color);
 void SSD1306_DrawFilledRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color);
 
-// 구현예정
-// void SSD1306_WriteChar(char ch, uint8_t x, uint8_t y);
-// void SSD1306_WriteString(char* str, uint8_t x, uint8_t y);
-
 #endif

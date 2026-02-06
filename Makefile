@@ -61,7 +61,10 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c \
 Core/Src/gpio.c \
 Core/Src/i2c.c \
 Core/Src/usart.c \
-Core/Src/ssd1306.c
+Core/Src/ssd1306.c \
+Core/Src/ssd1306_font.c \
+Core/Src/font_ascii.c \
+Core/Src/font_hangul.c \
 
 # ASM sources
 ASM_SOURCES =  \
