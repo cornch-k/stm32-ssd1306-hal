@@ -1,0 +1,1159 @@
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"ssd1306_font.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/ssd1306_font.c"
+  20              		.section	.text.utf8_decode,"ax",%progbits
+  21              		.align	1
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	utf8_decode:
+  27              	.LVL0:
+  28              	.LFB137:
+   1:Core/Src/ssd1306_font.c **** #include "ssd1306_font.h"
+   2:Core/Src/ssd1306_font.c **** #include "font_ascii.h"
+   3:Core/Src/ssd1306_font.c **** #include "font_hangul.h"
+   4:Core/Src/ssd1306_font.c **** 
+   5:Core/Src/ssd1306_font.c **** static uint8_t cursor_x = 0;
+   6:Core/Src/ssd1306_font.c **** static uint8_t cursor_y = 0;
+   7:Core/Src/ssd1306_font.c **** 
+   8:Core/Src/ssd1306_font.c **** void SSD1306_SetCursor(uint8_t x, uint8_t y)
+   9:Core/Src/ssd1306_font.c **** {
+  10:Core/Src/ssd1306_font.c ****     cursor_x = x;
+  11:Core/Src/ssd1306_font.c ****     cursor_y = y;
+  12:Core/Src/ssd1306_font.c **** }
+  13:Core/Src/ssd1306_font.c **** 
+  14:Core/Src/ssd1306_font.c **** void SSD1306_GetCursor(uint8_t *x, uint8_t *y)
+  15:Core/Src/ssd1306_font.c **** {
+  16:Core/Src/ssd1306_font.c ****     if (x) *x = cursor_x;
+  17:Core/Src/ssd1306_font.c ****     if (y) *y = cursor_y;
+  18:Core/Src/ssd1306_font.c **** }
+  19:Core/Src/ssd1306_font.c **** 
+  20:Core/Src/ssd1306_font.c **** static void SSD1306_DrawGlyph(const uint8_t *data, uint8_t x, uint8_t y, 
+  21:Core/Src/ssd1306_font.c ****                                uint8_t width, uint8_t color)
+  22:Core/Src/ssd1306_font.c **** {
+  23:Core/Src/ssd1306_font.c ****     for (uint8_t row = 0; row < FONT_ASCII_HEIGHT; row++) {
+  24:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
+  25:Core/Src/ssd1306_font.c ****         uint8_t byte_lo = data[row * 2 + 1];
+  26:Core/Src/ssd1306_font.c ****         
+  27:Core/Src/ssd1306_font.c ****         for (uint8_t col = 0; col < width; col++) {
+  28:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+  29:Core/Src/ssd1306_font.c ****             if (col < 8) {
+  30:Core/Src/ssd1306_font.c ****                 pixel = (byte_hi >> (7 - col)) & 1;
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 2
+
+
+  31:Core/Src/ssd1306_font.c ****             } else {
+  32:Core/Src/ssd1306_font.c ****                 pixel = (byte_lo >> (7 - (col - 8))) & 1;
+  33:Core/Src/ssd1306_font.c ****             }
+  34:Core/Src/ssd1306_font.c ****             
+  35:Core/Src/ssd1306_font.c ****             if (pixel) {
+  36:Core/Src/ssd1306_font.c ****                 SSD1306_DrawPixel(x + col, y + row, color);
+  37:Core/Src/ssd1306_font.c ****             }
+  38:Core/Src/ssd1306_font.c ****         }
+  39:Core/Src/ssd1306_font.c ****     }
+  40:Core/Src/ssd1306_font.c **** }
+  41:Core/Src/ssd1306_font.c **** 
+  42:Core/Src/ssd1306_font.c **** static uint32_t utf8_decode(const char *str, uint8_t *bytes_consumed)
+  43:Core/Src/ssd1306_font.c **** {
+  29              		.loc 1 43 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  44:Core/Src/ssd1306_font.c ****     uint8_t c = (uint8_t)str[0];
+  34              		.loc 1 44 5 view .LVU1
+  35              		.loc 1 44 13 is_stmt 0 view .LVU2
+  36 0000 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+  37              	.LVL1:
+  45:Core/Src/ssd1306_font.c ****     
+  46:Core/Src/ssd1306_font.c ****     if (c == 0) {
+  38              		.loc 1 46 5 is_stmt 1 view .LVU3
+  39              		.loc 1 46 8 is_stmt 0 view .LVU4
+  40 0002 9BB1     		cbz	r3, .L8
+  47:Core/Src/ssd1306_font.c ****         *bytes_consumed = 0;
+  48:Core/Src/ssd1306_font.c ****         return 0;
+  49:Core/Src/ssd1306_font.c ****     }
+  50:Core/Src/ssd1306_font.c ****     
+  51:Core/Src/ssd1306_font.c ****     if ((c & 0x80) == 0) {
+  41              		.loc 1 51 5 is_stmt 1 view .LVU5
+  42              		.loc 1 51 8 is_stmt 0 view .LVU6
+  43 0004 13F0800F 		tst	r3, #128
+  44 0008 13D0     		beq	.L9
+  52:Core/Src/ssd1306_font.c ****         *bytes_consumed = 1;
+  53:Core/Src/ssd1306_font.c ****         return c;
+  54:Core/Src/ssd1306_font.c ****     }
+  55:Core/Src/ssd1306_font.c ****     
+  56:Core/Src/ssd1306_font.c ****     if ((c & 0xE0) == 0xC0) {
+  45              		.loc 1 56 5 is_stmt 1 view .LVU7
+  46              		.loc 1 56 8 is_stmt 0 view .LVU8
+  47 000a 03F0E002 		and	r2, r3, #224
+  48 000e C02A     		cmp	r2, #192
+  49 0010 13D0     		beq	.L10
+  57:Core/Src/ssd1306_font.c ****         *bytes_consumed = 2;
+  58:Core/Src/ssd1306_font.c ****         return ((c & 0x1F) << 6) | ((uint8_t)str[1] & 0x3F);
+  59:Core/Src/ssd1306_font.c ****     }
+  60:Core/Src/ssd1306_font.c ****     
+  61:Core/Src/ssd1306_font.c ****     if ((c & 0xF0) == 0xE0) {
+  50              		.loc 1 61 5 is_stmt 1 view .LVU9
+  51              		.loc 1 61 8 is_stmt 0 view .LVU10
+  52 0012 03F0F002 		and	r2, r3, #240
+  53 0016 E02A     		cmp	r2, #224
+  54 0018 1AD0     		beq	.L11
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 3
+
+
+  62:Core/Src/ssd1306_font.c ****         *bytes_consumed = 3;
+  63:Core/Src/ssd1306_font.c ****         return ((c & 0x0F) << 12) | 
+  64:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 6) | 
+  65:Core/Src/ssd1306_font.c ****                ((uint8_t)str[2] & 0x3F);
+  66:Core/Src/ssd1306_font.c ****     }
+  67:Core/Src/ssd1306_font.c ****     
+  68:Core/Src/ssd1306_font.c ****     if ((c & 0xF8) == 0xF0) {
+  55              		.loc 1 68 5 is_stmt 1 view .LVU11
+  56              		.loc 1 68 8 is_stmt 0 view .LVU12
+  57 001a 03F0F802 		and	r2, r3, #248
+  58 001e F02A     		cmp	r2, #240
+  59 0020 25D0     		beq	.L12
+  69:Core/Src/ssd1306_font.c ****         *bytes_consumed = 4;
+  70:Core/Src/ssd1306_font.c ****         return ((c & 0x07) << 18) | 
+  71:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 12) | 
+  72:Core/Src/ssd1306_font.c ****                (((uint8_t)str[2] & 0x3F) << 6) | 
+  73:Core/Src/ssd1306_font.c ****                ((uint8_t)str[3] & 0x3F);
+  74:Core/Src/ssd1306_font.c ****     }
+  75:Core/Src/ssd1306_font.c ****     
+  76:Core/Src/ssd1306_font.c ****     *bytes_consumed = 1;
+  60              		.loc 1 76 5 is_stmt 1 view .LVU13
+  61              		.loc 1 76 21 is_stmt 0 view .LVU14
+  62 0022 0123     		movs	r3, #1
+  63              	.LVL2:
+  64              		.loc 1 76 21 view .LVU15
+  65 0024 0B70     		strb	r3, [r1]
+  66              	.LVL3:
+  77:Core/Src/ssd1306_font.c ****     return 0xFFFFFFFF;
+  67              		.loc 1 77 5 is_stmt 1 view .LVU16
+  68              		.loc 1 77 12 is_stmt 0 view .LVU17
+  69 0026 4FF0FF30 		mov	r0, #-1
+  70              	.LVL4:
+  78:Core/Src/ssd1306_font.c **** }
+  71              		.loc 1 78 1 view .LVU18
+  72 002a 7047     		bx	lr
+  73              	.LVL5:
+  74              	.L8:
+  47:Core/Src/ssd1306_font.c ****         return 0;
+  75              		.loc 1 47 9 is_stmt 1 view .LVU19
+  47:Core/Src/ssd1306_font.c ****         return 0;
+  76              		.loc 1 47 25 is_stmt 0 view .LVU20
+  77 002c 0020     		movs	r0, #0
+  78              	.LVL6:
+  47:Core/Src/ssd1306_font.c ****         return 0;
+  79              		.loc 1 47 25 view .LVU21
+  80 002e 0870     		strb	r0, [r1]
+  48:Core/Src/ssd1306_font.c ****     }
+  81              		.loc 1 48 9 is_stmt 1 view .LVU22
+  48:Core/Src/ssd1306_font.c ****     }
+  82              		.loc 1 48 16 is_stmt 0 view .LVU23
+  83 0030 7047     		bx	lr
+  84              	.LVL7:
+  85              	.L9:
+  52:Core/Src/ssd1306_font.c ****         return c;
+  86              		.loc 1 52 9 is_stmt 1 view .LVU24
+  52:Core/Src/ssd1306_font.c ****         return c;
+  87              		.loc 1 52 25 is_stmt 0 view .LVU25
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 4
+
+
+  88 0032 0122     		movs	r2, #1
+  89 0034 0A70     		strb	r2, [r1]
+  53:Core/Src/ssd1306_font.c ****     }
+  90              		.loc 1 53 9 is_stmt 1 view .LVU26
+  53:Core/Src/ssd1306_font.c ****     }
+  91              		.loc 1 53 16 is_stmt 0 view .LVU27
+  92 0036 1846     		mov	r0, r3
+  93              	.LVL8:
+  53:Core/Src/ssd1306_font.c ****     }
+  94              		.loc 1 53 16 view .LVU28
+  95 0038 7047     		bx	lr
+  96              	.LVL9:
+  97              	.L10:
+  57:Core/Src/ssd1306_font.c ****         return ((c & 0x1F) << 6) | ((uint8_t)str[1] & 0x3F);
+  98              		.loc 1 57 9 is_stmt 1 view .LVU29
+  57:Core/Src/ssd1306_font.c ****         return ((c & 0x1F) << 6) | ((uint8_t)str[1] & 0x3F);
+  99              		.loc 1 57 25 is_stmt 0 view .LVU30
+ 100 003a 0222     		movs	r2, #2
+ 101 003c 0A70     		strb	r2, [r1]
+  58:Core/Src/ssd1306_font.c ****     }
+ 102              		.loc 1 58 9 is_stmt 1 view .LVU31
+  58:Core/Src/ssd1306_font.c ****     }
+ 103              		.loc 1 58 28 is_stmt 0 view .LVU32
+ 104 003e 9B01     		lsls	r3, r3, #6
+ 105              	.LVL10:
+  58:Core/Src/ssd1306_font.c ****     }
+ 106              		.loc 1 58 28 view .LVU33
+ 107 0040 03F4F863 		and	r3, r3, #1984
+  58:Core/Src/ssd1306_font.c ****     }
+ 108              		.loc 1 58 49 view .LVU34
+ 109 0044 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+  58:Core/Src/ssd1306_font.c ****     }
+ 110              		.loc 1 58 53 view .LVU35
+ 111 0046 02F03F02 		and	r2, r2, #63
+  58:Core/Src/ssd1306_font.c ****     }
+ 112              		.loc 1 58 34 view .LVU36
+ 113 004a 43EA0200 		orr	r0, r3, r2
+ 114              	.LVL11:
+  58:Core/Src/ssd1306_font.c ****     }
+ 115              		.loc 1 58 34 view .LVU37
+ 116 004e 7047     		bx	lr
+ 117              	.LVL12:
+ 118              	.L11:
+  62:Core/Src/ssd1306_font.c ****         return ((c & 0x0F) << 12) | 
+ 119              		.loc 1 62 9 is_stmt 1 view .LVU38
+  62:Core/Src/ssd1306_font.c ****         return ((c & 0x0F) << 12) | 
+ 120              		.loc 1 62 25 is_stmt 0 view .LVU39
+ 121 0050 0322     		movs	r2, #3
+ 122 0052 0A70     		strb	r2, [r1]
+  63:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 6) | 
+ 123              		.loc 1 63 9 is_stmt 1 view .LVU40
+  63:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 6) | 
+ 124              		.loc 1 63 28 is_stmt 0 view .LVU41
+ 125 0054 1B03     		lsls	r3, r3, #12
+ 126              	.LVL13:
+  63:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 6) | 
+ 127              		.loc 1 63 28 view .LVU42
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 5
+
+
+ 128 0056 9BB2     		uxth	r3, r3
+  64:Core/Src/ssd1306_font.c ****                ((uint8_t)str[2] & 0x3F);
+ 129              		.loc 1 64 30 view .LVU43
+ 130 0058 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+  64:Core/Src/ssd1306_font.c ****                ((uint8_t)str[2] & 0x3F);
+ 131              		.loc 1 64 42 view .LVU44
+ 132 005a 9201     		lsls	r2, r2, #6
+ 133 005c 02F47C62 		and	r2, r2, #4032
+  63:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 6) | 
+ 134              		.loc 1 63 35 view .LVU45
+ 135 0060 1343     		orrs	r3, r3, r2
+  65:Core/Src/ssd1306_font.c ****     }
+ 136              		.loc 1 65 29 view .LVU46
+ 137 0062 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+  65:Core/Src/ssd1306_font.c ****     }
+ 138              		.loc 1 65 33 view .LVU47
+ 139 0064 02F03F02 		and	r2, r2, #63
+  64:Core/Src/ssd1306_font.c ****                ((uint8_t)str[2] & 0x3F);
+ 140              		.loc 1 64 48 view .LVU48
+ 141 0068 43EA0200 		orr	r0, r3, r2
+ 142              	.LVL14:
+  64:Core/Src/ssd1306_font.c ****                ((uint8_t)str[2] & 0x3F);
+ 143              		.loc 1 64 48 view .LVU49
+ 144 006c 7047     		bx	lr
+ 145              	.LVL15:
+ 146              	.L12:
+  69:Core/Src/ssd1306_font.c ****         return ((c & 0x07) << 18) | 
+ 147              		.loc 1 69 9 is_stmt 1 view .LVU50
+  69:Core/Src/ssd1306_font.c ****         return ((c & 0x07) << 18) | 
+ 148              		.loc 1 69 25 is_stmt 0 view .LVU51
+ 149 006e 0422     		movs	r2, #4
+ 150 0070 0A70     		strb	r2, [r1]
+  70:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 12) | 
+ 151              		.loc 1 70 9 is_stmt 1 view .LVU52
+  70:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 12) | 
+ 152              		.loc 1 70 28 is_stmt 0 view .LVU53
+ 153 0072 9B04     		lsls	r3, r3, #18
+ 154              	.LVL16:
+  70:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 12) | 
+ 155              		.loc 1 70 28 view .LVU54
+ 156 0074 03F4E013 		and	r3, r3, #1835008
+  71:Core/Src/ssd1306_font.c ****                (((uint8_t)str[2] & 0x3F) << 6) | 
+ 157              		.loc 1 71 30 view .LVU55
+ 158 0078 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+  71:Core/Src/ssd1306_font.c ****                (((uint8_t)str[2] & 0x3F) << 6) | 
+ 159              		.loc 1 71 42 view .LVU56
+ 160 007a 1203     		lsls	r2, r2, #12
+ 161 007c 02F47C32 		and	r2, r2, #258048
+  70:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 12) | 
+ 162              		.loc 1 70 35 view .LVU57
+ 163 0080 1343     		orrs	r3, r3, r2
+  72:Core/Src/ssd1306_font.c ****                ((uint8_t)str[3] & 0x3F);
+ 164              		.loc 1 72 30 view .LVU58
+ 165 0082 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+  72:Core/Src/ssd1306_font.c ****                ((uint8_t)str[3] & 0x3F);
+ 166              		.loc 1 72 42 view .LVU59
+ 167 0084 9201     		lsls	r2, r2, #6
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 6
+
+
+ 168 0086 02F47C62 		and	r2, r2, #4032
+  71:Core/Src/ssd1306_font.c ****                (((uint8_t)str[2] & 0x3F) << 6) | 
+ 169              		.loc 1 71 49 view .LVU60
+ 170 008a 1343     		orrs	r3, r3, r2
+  73:Core/Src/ssd1306_font.c ****     }
+ 171              		.loc 1 73 29 view .LVU61
+ 172 008c C278     		ldrb	r2, [r0, #3]	@ zero_extendqisi2
+  73:Core/Src/ssd1306_font.c ****     }
+ 173              		.loc 1 73 33 view .LVU62
+ 174 008e 02F03F02 		and	r2, r2, #63
+  72:Core/Src/ssd1306_font.c ****                ((uint8_t)str[3] & 0x3F);
+ 175              		.loc 1 72 48 view .LVU63
+ 176 0092 43EA0200 		orr	r0, r3, r2
+ 177              	.LVL17:
+  72:Core/Src/ssd1306_font.c ****                ((uint8_t)str[3] & 0x3F);
+ 178              		.loc 1 72 48 view .LVU64
+ 179 0096 7047     		bx	lr
+ 180              		.cfi_endproc
+ 181              	.LFE137:
+ 183              		.section	.text.SSD1306_DrawGlyph,"ax",%progbits
+ 184              		.align	1
+ 185              		.syntax unified
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	SSD1306_DrawGlyph:
+ 190              	.LVL18:
+ 191              	.LFB136:
+  22:Core/Src/ssd1306_font.c ****     for (uint8_t row = 0; row < FONT_ASCII_HEIGHT; row++) {
+ 192              		.loc 1 22 1 is_stmt 1 view -0
+ 193              		.cfi_startproc
+ 194              		@ args = 4, pretend = 0, frame = 8
+ 195              		@ frame_needed = 0, uses_anonymous_args = 0
+  22:Core/Src/ssd1306_font.c ****     for (uint8_t row = 0; row < FONT_ASCII_HEIGHT; row++) {
+ 196              		.loc 1 22 1 is_stmt 0 view .LVU66
+ 197 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 198              	.LCFI0:
+ 199              		.cfi_def_cfa_offset 36
+ 200              		.cfi_offset 4, -36
+ 201              		.cfi_offset 5, -32
+ 202              		.cfi_offset 6, -28
+ 203              		.cfi_offset 7, -24
+ 204              		.cfi_offset 8, -20
+ 205              		.cfi_offset 9, -16
+ 206              		.cfi_offset 10, -12
+ 207              		.cfi_offset 11, -8
+ 208              		.cfi_offset 14, -4
+ 209 0004 83B0     		sub	sp, sp, #12
+ 210              	.LCFI1:
+ 211              		.cfi_def_cfa_offset 48
+ 212 0006 0190     		str	r0, [sp, #4]
+ 213 0008 8A46     		mov	r10, r1
+ 214 000a 9146     		mov	r9, r2
+ 215 000c 1E46     		mov	r6, r3
+ 216 000e 9DF830B0 		ldrb	fp, [sp, #48]	@ zero_extendqisi2
+  23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
+ 217              		.loc 1 23 5 is_stmt 1 view .LVU67
+ 218              	.LBB2:
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 7
+
+
+  23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
+ 219              		.loc 1 23 10 view .LVU68
+ 220              	.LVL19:
+  23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
+ 221              		.loc 1 23 18 is_stmt 0 view .LVU69
+ 222 0012 0025     		movs	r5, #0
+  23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
+ 223              		.loc 1 23 5 view .LVU70
+ 224 0014 1FE0     		b	.L14
+ 225              	.LVL20:
+ 226              	.L24:
+ 227              	.LBB3:
+ 228              	.LBB4:
+ 229              	.LBB5:
+  30:Core/Src/ssd1306_font.c ****             } else {
+ 230              		.loc 1 30 17 is_stmt 1 view .LVU71
+  30:Core/Src/ssd1306_font.c ****             } else {
+ 231              		.loc 1 30 40 is_stmt 0 view .LVU72
+ 232 0016 C4F10703 		rsb	r3, r4, #7
+  30:Core/Src/ssd1306_font.c ****             } else {
+ 233              		.loc 1 30 34 view .LVU73
+ 234 001a 48FA03F3 		asr	r3, r8, r3
+  30:Core/Src/ssd1306_font.c ****             } else {
+ 235              		.loc 1 30 23 view .LVU74
+ 236 001e 03F00103 		and	r3, r3, #1
+ 237              	.LVL21:
+ 238              	.L17:
+  35:Core/Src/ssd1306_font.c ****                 SSD1306_DrawPixel(x + col, y + row, color);
+ 239              		.loc 1 35 13 is_stmt 1 view .LVU75
+  35:Core/Src/ssd1306_font.c ****                 SSD1306_DrawPixel(x + col, y + row, color);
+ 240              		.loc 1 35 16 is_stmt 0 view .LVU76
+ 241 0022 63B9     		cbnz	r3, .L22
+ 242              	.LVL22:
+ 243              	.L18:
+  35:Core/Src/ssd1306_font.c ****                 SSD1306_DrawPixel(x + col, y + row, color);
+ 244              		.loc 1 35 16 view .LVU77
+ 245              	.LBE5:
+  27:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+ 246              		.loc 1 27 47 is_stmt 1 discriminator 2 view .LVU78
+ 247 0024 0134     		adds	r4, r4, #1
+ 248              	.LVL23:
+  27:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+ 249              		.loc 1 27 47 is_stmt 0 discriminator 2 view .LVU79
+ 250 0026 E4B2     		uxtb	r4, r4
+ 251              	.LVL24:
+ 252              	.L15:
+  27:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+ 253              		.loc 1 27 35 is_stmt 1 discriminator 1 view .LVU80
+ 254 0028 B442     		cmp	r4, r6
+ 255 002a 12D2     		bcs	.L23
+ 256              	.LBB6:
+  28:Core/Src/ssd1306_font.c ****             if (col < 8) {
+ 257              		.loc 1 28 13 view .LVU81
+  29:Core/Src/ssd1306_font.c ****                 pixel = (byte_hi >> (7 - col)) & 1;
+ 258              		.loc 1 29 13 view .LVU82
+  29:Core/Src/ssd1306_font.c ****                 pixel = (byte_hi >> (7 - col)) & 1;
+ 259              		.loc 1 29 16 is_stmt 0 view .LVU83
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 8
+
+
+ 260 002c 072C     		cmp	r4, #7
+ 261 002e F2D9     		bls	.L24
+  32:Core/Src/ssd1306_font.c ****             }
+ 262              		.loc 1 32 17 is_stmt 1 view .LVU84
+  32:Core/Src/ssd1306_font.c ****             }
+ 263              		.loc 1 32 40 is_stmt 0 view .LVU85
+ 264 0030 C4F10F03 		rsb	r3, r4, #15
+  32:Core/Src/ssd1306_font.c ****             }
+ 265              		.loc 1 32 34 view .LVU86
+ 266 0034 47FA03F3 		asr	r3, r7, r3
+  32:Core/Src/ssd1306_font.c ****             }
+ 267              		.loc 1 32 23 view .LVU87
+ 268 0038 03F00103 		and	r3, r3, #1
+ 269              	.LVL25:
+  32:Core/Src/ssd1306_font.c ****             }
+ 270              		.loc 1 32 23 view .LVU88
+ 271 003c F1E7     		b	.L17
+ 272              	.L22:
+  36:Core/Src/ssd1306_font.c ****             }
+ 273              		.loc 1 36 17 is_stmt 1 view .LVU89
+ 274 003e 05EB0901 		add	r1, r5, r9
+ 275 0042 04EB0A00 		add	r0, r4, r10
+ 276 0046 5A46     		mov	r2, fp
+ 277 0048 C9B2     		uxtb	r1, r1
+ 278 004a C0B2     		uxtb	r0, r0
+ 279 004c FFF7FEFF 		bl	SSD1306_DrawPixel
+ 280              	.LVL26:
+  36:Core/Src/ssd1306_font.c ****             }
+ 281              		.loc 1 36 17 is_stmt 0 view .LVU90
+ 282 0050 E8E7     		b	.L18
+ 283              	.LVL27:
+ 284              	.L23:
+  36:Core/Src/ssd1306_font.c ****             }
+ 285              		.loc 1 36 17 view .LVU91
+ 286              	.LBE6:
+ 287              	.LBE4:
+ 288              	.LBE3:
+  23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
+ 289              		.loc 1 23 55 is_stmt 1 discriminator 2 view .LVU92
+ 290 0052 0135     		adds	r5, r5, #1
+ 291              	.LVL28:
+  23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
+ 292              		.loc 1 23 55 is_stmt 0 discriminator 2 view .LVU93
+ 293 0054 EDB2     		uxtb	r5, r5
+ 294              	.LVL29:
+ 295              	.L14:
+  23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
+ 296              		.loc 1 23 31 is_stmt 1 discriminator 1 view .LVU94
+ 297 0056 0B2D     		cmp	r5, #11
+ 298 0058 07D8     		bhi	.L25
+ 299              	.LBB8:
+  24:Core/Src/ssd1306_font.c ****         uint8_t byte_lo = data[row * 2 + 1];
+ 300              		.loc 1 24 9 view .LVU95
+  24:Core/Src/ssd1306_font.c ****         uint8_t byte_lo = data[row * 2 + 1];
+ 301              		.loc 1 24 36 is_stmt 0 view .LVU96
+ 302 005a 6B00     		lsls	r3, r5, #1
+  24:Core/Src/ssd1306_font.c ****         uint8_t byte_lo = data[row * 2 + 1];
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 9
+
+
+ 303              		.loc 1 24 17 view .LVU97
+ 304 005c 019A     		ldr	r2, [sp, #4]
+ 305 005e 12F81580 		ldrb	r8, [r2, r5, lsl #1]	@ zero_extendqisi2
+ 306              	.LVL30:
+  25:Core/Src/ssd1306_font.c ****         
+ 307              		.loc 1 25 9 is_stmt 1 view .LVU98
+  25:Core/Src/ssd1306_font.c ****         
+ 308              		.loc 1 25 31 is_stmt 0 view .LVU99
+ 309 0062 0133     		adds	r3, r3, #1
+  25:Core/Src/ssd1306_font.c ****         
+ 310              		.loc 1 25 17 view .LVU100
+ 311 0064 D75C     		ldrb	r7, [r2, r3]	@ zero_extendqisi2
+ 312              	.LVL31:
+  27:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+ 313              		.loc 1 27 9 is_stmt 1 view .LVU101
+ 314              	.LBB7:
+  27:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+ 315              		.loc 1 27 14 view .LVU102
+  27:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+ 316              		.loc 1 27 22 is_stmt 0 view .LVU103
+ 317 0066 0024     		movs	r4, #0
+  27:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+ 318              		.loc 1 27 9 view .LVU104
+ 319 0068 DEE7     		b	.L15
+ 320              	.LVL32:
+ 321              	.L25:
+  27:Core/Src/ssd1306_font.c ****             uint8_t pixel;
+ 322              		.loc 1 27 9 view .LVU105
+ 323              	.LBE7:
+ 324              	.LBE8:
+ 325              	.LBE2:
+  40:Core/Src/ssd1306_font.c **** 
+ 326              		.loc 1 40 1 view .LVU106
+ 327 006a 03B0     		add	sp, sp, #12
+ 328              	.LCFI2:
+ 329              		.cfi_def_cfa_offset 36
+ 330              		@ sp needed
+ 331 006c BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+  40:Core/Src/ssd1306_font.c **** 
+ 332              		.loc 1 40 1 view .LVU107
+ 333              		.cfi_endproc
+ 334              	.LFE136:
+ 336              		.section	.text.SSD1306_SetCursor,"ax",%progbits
+ 337              		.align	1
+ 338              		.global	SSD1306_SetCursor
+ 339              		.syntax unified
+ 340              		.thumb
+ 341              		.thumb_func
+ 343              	SSD1306_SetCursor:
+ 344              	.LVL33:
+ 345              	.LFB134:
+   9:Core/Src/ssd1306_font.c ****     cursor_x = x;
+ 346              		.loc 1 9 1 is_stmt 1 view -0
+ 347              		.cfi_startproc
+ 348              		@ args = 0, pretend = 0, frame = 0
+ 349              		@ frame_needed = 0, uses_anonymous_args = 0
+ 350              		@ link register save eliminated.
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 10
+
+
+  10:Core/Src/ssd1306_font.c ****     cursor_y = y;
+ 351              		.loc 1 10 5 view .LVU109
+  10:Core/Src/ssd1306_font.c ****     cursor_y = y;
+ 352              		.loc 1 10 14 is_stmt 0 view .LVU110
+ 353 0000 024B     		ldr	r3, .L27
+ 354 0002 1870     		strb	r0, [r3]
+  11:Core/Src/ssd1306_font.c **** }
+ 355              		.loc 1 11 5 is_stmt 1 view .LVU111
+  11:Core/Src/ssd1306_font.c **** }
+ 356              		.loc 1 11 14 is_stmt 0 view .LVU112
+ 357 0004 024B     		ldr	r3, .L27+4
+ 358 0006 1970     		strb	r1, [r3]
+  12:Core/Src/ssd1306_font.c **** 
+ 359              		.loc 1 12 1 view .LVU113
+ 360 0008 7047     		bx	lr
+ 361              	.L28:
+ 362 000a 00BF     		.align	2
+ 363              	.L27:
+ 364 000c 00000000 		.word	cursor_x
+ 365 0010 00000000 		.word	cursor_y
+ 366              		.cfi_endproc
+ 367              	.LFE134:
+ 369              		.section	.text.SSD1306_GetCursor,"ax",%progbits
+ 370              		.align	1
+ 371              		.global	SSD1306_GetCursor
+ 372              		.syntax unified
+ 373              		.thumb
+ 374              		.thumb_func
+ 376              	SSD1306_GetCursor:
+ 377              	.LVL34:
+ 378              	.LFB135:
+  15:Core/Src/ssd1306_font.c ****     if (x) *x = cursor_x;
+ 379              		.loc 1 15 1 is_stmt 1 view -0
+ 380              		.cfi_startproc
+ 381              		@ args = 0, pretend = 0, frame = 0
+ 382              		@ frame_needed = 0, uses_anonymous_args = 0
+ 383              		@ link register save eliminated.
+  16:Core/Src/ssd1306_font.c ****     if (y) *y = cursor_y;
+ 384              		.loc 1 16 5 view .LVU115
+  16:Core/Src/ssd1306_font.c ****     if (y) *y = cursor_y;
+ 385              		.loc 1 16 8 is_stmt 0 view .LVU116
+ 386 0000 10B1     		cbz	r0, .L30
+  16:Core/Src/ssd1306_font.c ****     if (y) *y = cursor_y;
+ 387              		.loc 1 16 12 is_stmt 1 discriminator 1 view .LVU117
+  16:Core/Src/ssd1306_font.c ****     if (y) *y = cursor_y;
+ 388              		.loc 1 16 15 is_stmt 0 discriminator 1 view .LVU118
+ 389 0002 044A     		ldr	r2, .L32
+ 390 0004 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 391 0006 0270     		strb	r2, [r0]
+ 392              	.L30:
+  17:Core/Src/ssd1306_font.c **** }
+ 393              		.loc 1 17 5 is_stmt 1 view .LVU119
+  17:Core/Src/ssd1306_font.c **** }
+ 394              		.loc 1 17 8 is_stmt 0 view .LVU120
+ 395 0008 11B1     		cbz	r1, .L29
+  17:Core/Src/ssd1306_font.c **** }
+ 396              		.loc 1 17 12 is_stmt 1 discriminator 1 view .LVU121
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 11
+
+
+  17:Core/Src/ssd1306_font.c **** }
+ 397              		.loc 1 17 15 is_stmt 0 discriminator 1 view .LVU122
+ 398 000a 034B     		ldr	r3, .L32+4
+ 399 000c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 400 000e 0B70     		strb	r3, [r1]
+ 401              	.L29:
+  18:Core/Src/ssd1306_font.c **** 
+ 402              		.loc 1 18 1 view .LVU123
+ 403 0010 7047     		bx	lr
+ 404              	.L33:
+ 405 0012 00BF     		.align	2
+ 406              	.L32:
+ 407 0014 00000000 		.word	cursor_x
+ 408 0018 00000000 		.word	cursor_y
+ 409              		.cfi_endproc
+ 410              	.LFE135:
+ 412              		.section	.text.SSD1306_WriteChar,"ax",%progbits
+ 413              		.align	1
+ 414              		.global	SSD1306_WriteChar
+ 415              		.syntax unified
+ 416              		.thumb
+ 417              		.thumb_func
+ 419              	SSD1306_WriteChar:
+ 420              	.LVL35:
+ 421              	.LFB138:
+  79:Core/Src/ssd1306_font.c **** 
+  80:Core/Src/ssd1306_font.c **** uint8_t SSD1306_WriteChar(uint32_t codepoint, uint8_t color)
+  81:Core/Src/ssd1306_font.c **** {
+ 422              		.loc 1 81 1 is_stmt 1 view -0
+ 423              		.cfi_startproc
+ 424              		@ args = 0, pretend = 0, frame = 0
+ 425              		@ frame_needed = 0, uses_anonymous_args = 0
+ 426              		.loc 1 81 1 is_stmt 0 view .LVU125
+ 427 0000 10B5     		push	{r4, lr}
+ 428              	.LCFI3:
+ 429              		.cfi_def_cfa_offset 8
+ 430              		.cfi_offset 4, -8
+ 431              		.cfi_offset 14, -4
+ 432 0002 82B0     		sub	sp, sp, #8
+ 433              	.LCFI4:
+ 434              		.cfi_def_cfa_offset 16
+  82:Core/Src/ssd1306_font.c ****     const uint8_t *data = NULL;
+ 435              		.loc 1 82 5 is_stmt 1 view .LVU126
+ 436              	.LVL36:
+  83:Core/Src/ssd1306_font.c ****     uint8_t char_width = 0;
+ 437              		.loc 1 83 5 view .LVU127
+  84:Core/Src/ssd1306_font.c ****     
+  85:Core/Src/ssd1306_font.c ****     /* ASCII */
+  86:Core/Src/ssd1306_font.c ****     if (codepoint >= FONT_ASCII_START && codepoint <= FONT_ASCII_END) {
+ 438              		.loc 1 86 5 view .LVU128
+ 439              		.loc 1 86 39 is_stmt 0 view .LVU129
+ 440 0004 A0F12003 		sub	r3, r0, #32
+ 441              		.loc 1 86 8 view .LVU130
+ 442 0008 5E2B     		cmp	r3, #94
+ 443 000a 16D8     		bhi	.L35
+ 444              	.LBB9:
+  87:Core/Src/ssd1306_font.c ****         uint8_t idx = codepoint - FONT_ASCII_START;
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 12
+
+
+ 445              		.loc 1 87 9 is_stmt 1 view .LVU131
+ 446              		.loc 1 87 33 is_stmt 0 view .LVU132
+ 447 000c C3B2     		uxtb	r3, r0
+ 448              		.loc 1 87 17 view .LVU133
+ 449 000e 203B     		subs	r3, r3, #32
+ 450 0010 DBB2     		uxtb	r3, r3
+ 451              	.LVL37:
+  88:Core/Src/ssd1306_font.c ****         data = font_ascii_data[idx];
+ 452              		.loc 1 88 9 is_stmt 1 view .LVU134
+ 453              		.loc 1 88 14 is_stmt 0 view .LVU135
+ 454 0012 03EB4302 		add	r2, r3, r3, lsl #1
+ 455 0016 1948     		ldr	r0, .L43
+ 456              	.LVL38:
+ 457              		.loc 1 88 14 view .LVU136
+ 458 0018 00EBC200 		add	r0, r0, r2, lsl #3
+ 459              	.LVL39:
+  89:Core/Src/ssd1306_font.c ****         char_width = font_ascii_width[idx];
+ 460              		.loc 1 89 9 is_stmt 1 view .LVU137
+ 461              		.loc 1 89 20 is_stmt 0 view .LVU138
+ 462 001c 184A     		ldr	r2, .L43+4
+ 463 001e D45C     		ldrb	r4, [r2, r3]	@ zero_extendqisi2
+ 464              	.LVL40:
+ 465              	.L36:
+ 466              		.loc 1 89 20 view .LVU139
+ 467              	.LBE9:
+  90:Core/Src/ssd1306_font.c ****     }
+  91:Core/Src/ssd1306_font.c ****     /* 한글 */
+  92:Core/Src/ssd1306_font.c ****     else if (codepoint >= FONT_HANGUL_START && codepoint <= FONT_HANGUL_END) {
+  93:Core/Src/ssd1306_font.c ****         uint16_t idx = codepoint - FONT_HANGUL_START;
+  94:Core/Src/ssd1306_font.c ****         data = font_hangul_data[idx];
+  95:Core/Src/ssd1306_font.c ****         char_width = FONT_HANGUL_WIDTH;
+  96:Core/Src/ssd1306_font.c ****     }
+  97:Core/Src/ssd1306_font.c ****     else {
+  98:Core/Src/ssd1306_font.c ****         /* 지원하지 않는 문자는 네모 표시 대신 빈 칸 */
+  99:Core/Src/ssd1306_font.c ****         return 0;
+ 100:Core/Src/ssd1306_font.c ****     }
+ 101:Core/Src/ssd1306_font.c ****     
+ 102:Core/Src/ssd1306_font.c ****     if (cursor_x + char_width > SSD1306_WIDTH) {
+ 468              		.loc 1 102 5 is_stmt 1 view .LVU140
+ 469              		.loc 1 102 18 is_stmt 0 view .LVU141
+ 470 0020 184B     		ldr	r3, .L43+8
+ 471 0022 93F800C0 		ldrb	ip, [r3]	@ zero_extendqisi2
+ 472 0026 0CEB0403 		add	r3, ip, r4
+ 473              		.loc 1 102 8 view .LVU142
+ 474 002a 802B     		cmp	r3, #128
+ 475 002c 22DC     		bgt	.L39
+ 103:Core/Src/ssd1306_font.c ****         return 0;
+ 104:Core/Src/ssd1306_font.c ****     }
+ 105:Core/Src/ssd1306_font.c ****     if (cursor_y + FONT_ASCII_HEIGHT > SSD1306_HEIGHT) {
+ 476              		.loc 1 105 5 is_stmt 1 view .LVU143
+ 477              		.loc 1 105 38 is_stmt 0 view .LVU144
+ 478 002e 164B     		ldr	r3, .L43+12
+ 479 0030 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 480              		.loc 1 105 8 view .LVU145
+ 481 0032 342A     		cmp	r2, #52
+ 482 0034 12D9     		bls	.L42
+ 106:Core/Src/ssd1306_font.c ****         return 0;
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 13
+
+
+ 483              		.loc 1 106 16 view .LVU146
+ 484 0036 0024     		movs	r4, #0
+ 485              	.LVL41:
+ 486              		.loc 1 106 16 view .LVU147
+ 487 0038 1DE0     		b	.L37
+ 488              	.LVL42:
+ 489              	.L35:
+  92:Core/Src/ssd1306_font.c ****         uint16_t idx = codepoint - FONT_HANGUL_START;
+ 490              		.loc 1 92 10 is_stmt 1 view .LVU148
+  92:Core/Src/ssd1306_font.c ****         uint16_t idx = codepoint - FONT_HANGUL_START;
+ 491              		.loc 1 92 45 is_stmt 0 view .LVU149
+ 492 003a A0F52C42 		sub	r2, r0, #44032
+  92:Core/Src/ssd1306_font.c ****         uint16_t idx = codepoint - FONT_HANGUL_START;
+ 493              		.loc 1 92 13 view .LVU150
+ 494 003e 42F6A333 		movw	r3, #11171
+ 495 0042 9A42     		cmp	r2, r3
+ 496 0044 14D8     		bhi	.L38
+ 497              	.LBB10:
+  93:Core/Src/ssd1306_font.c ****         data = font_hangul_data[idx];
+ 498              		.loc 1 93 9 is_stmt 1 view .LVU151
+  93:Core/Src/ssd1306_font.c ****         data = font_hangul_data[idx];
+ 499              		.loc 1 93 34 is_stmt 0 view .LVU152
+ 500 0046 80B2     		uxth	r0, r0
+ 501              	.LVL43:
+  93:Core/Src/ssd1306_font.c ****         data = font_hangul_data[idx];
+ 502              		.loc 1 93 18 view .LVU153
+ 503 0048 00F5A840 		add	r0, r0, #21504
+ 504 004c 80B2     		uxth	r0, r0
+ 505              	.LVL44:
+  94:Core/Src/ssd1306_font.c ****         char_width = FONT_HANGUL_WIDTH;
+ 506              		.loc 1 94 9 is_stmt 1 view .LVU154
+  94:Core/Src/ssd1306_font.c ****         char_width = FONT_HANGUL_WIDTH;
+ 507              		.loc 1 94 14 is_stmt 0 view .LVU155
+ 508 004e 00EB4000 		add	r0, r0, r0, lsl #1
+ 509              	.LVL45:
+  94:Core/Src/ssd1306_font.c ****         char_width = FONT_HANGUL_WIDTH;
+ 510              		.loc 1 94 14 view .LVU156
+ 511 0052 0E4B     		ldr	r3, .L43+16
+ 512 0054 03EBC000 		add	r0, r3, r0, lsl #3
+ 513              	.LVL46:
+  95:Core/Src/ssd1306_font.c ****     }
+ 514              		.loc 1 95 9 is_stmt 1 view .LVU157
+  95:Core/Src/ssd1306_font.c ****     }
+ 515              		.loc 1 95 20 is_stmt 0 view .LVU158
+ 516 0058 0C24     		movs	r4, #12
+ 517              	.LBE10:
+ 518 005a E1E7     		b	.L36
+ 519              	.LVL47:
+ 520              	.L42:
+ 107:Core/Src/ssd1306_font.c ****     }
+ 108:Core/Src/ssd1306_font.c ****     
+ 109:Core/Src/ssd1306_font.c ****     SSD1306_DrawGlyph(data, cursor_x, cursor_y, char_width, color);
+ 521              		.loc 1 109 5 is_stmt 1 view .LVU159
+ 522 005c 0091     		str	r1, [sp]
+ 523 005e 2346     		mov	r3, r4
+ 524 0060 6146     		mov	r1, ip
+ 525              	.LVL48:
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 14
+
+
+ 526              		.loc 1 109 5 is_stmt 0 view .LVU160
+ 527 0062 FFF7FEFF 		bl	SSD1306_DrawGlyph
+ 528              	.LVL49:
+ 110:Core/Src/ssd1306_font.c ****     cursor_x += char_width;
+ 529              		.loc 1 110 5 is_stmt 1 view .LVU161
+ 530              		.loc 1 110 14 is_stmt 0 view .LVU162
+ 531 0066 074A     		ldr	r2, .L43+8
+ 532 0068 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 533 006a 2344     		add	r3, r3, r4
+ 534 006c 1370     		strb	r3, [r2]
+ 111:Core/Src/ssd1306_font.c ****     
+ 112:Core/Src/ssd1306_font.c ****     return char_width;
+ 535              		.loc 1 112 5 is_stmt 1 view .LVU163
+ 536              		.loc 1 112 12 is_stmt 0 view .LVU164
+ 537 006e 02E0     		b	.L37
+ 538              	.LVL50:
+ 539              	.L38:
+  99:Core/Src/ssd1306_font.c ****     }
+ 540              		.loc 1 99 16 view .LVU165
+ 541 0070 0024     		movs	r4, #0
+ 542 0072 00E0     		b	.L37
+ 543              	.LVL51:
+ 544              	.L39:
+ 103:Core/Src/ssd1306_font.c ****     }
+ 545              		.loc 1 103 16 view .LVU166
+ 546 0074 0024     		movs	r4, #0
+ 547              	.LVL52:
+ 548              	.L37:
+ 113:Core/Src/ssd1306_font.c **** }
+ 549              		.loc 1 113 1 view .LVU167
+ 550 0076 2046     		mov	r0, r4
+ 551 0078 02B0     		add	sp, sp, #8
+ 552              	.LCFI5:
+ 553              		.cfi_def_cfa_offset 8
+ 554              		@ sp needed
+ 555 007a 10BD     		pop	{r4, pc}
+ 556              	.L44:
+ 557              		.align	2
+ 558              	.L43:
+ 559 007c 00000000 		.word	font_ascii_data
+ 560 0080 00000000 		.word	font_ascii_width
+ 561 0084 00000000 		.word	cursor_x
+ 562 0088 00000000 		.word	cursor_y
+ 563 008c 00000000 		.word	font_hangul_data
+ 564              		.cfi_endproc
+ 565              	.LFE138:
+ 567              		.section	.text.SSD1306_WriteString,"ax",%progbits
+ 568              		.align	1
+ 569              		.global	SSD1306_WriteString
+ 570              		.syntax unified
+ 571              		.thumb
+ 572              		.thumb_func
+ 574              	SSD1306_WriteString:
+ 575              	.LVL53:
+ 576              	.LFB139:
+ 114:Core/Src/ssd1306_font.c **** 
+ 115:Core/Src/ssd1306_font.c **** 
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 15
+
+
+ 116:Core/Src/ssd1306_font.c **** void SSD1306_WriteString(const char *str, uint8_t color)
+ 117:Core/Src/ssd1306_font.c **** {
+ 577              		.loc 1 117 1 is_stmt 1 view -0
+ 578              		.cfi_startproc
+ 579              		@ args = 0, pretend = 0, frame = 8
+ 580              		@ frame_needed = 0, uses_anonymous_args = 0
+ 581              		.loc 1 117 1 is_stmt 0 view .LVU169
+ 582 0000 30B5     		push	{r4, r5, lr}
+ 583              	.LCFI6:
+ 584              		.cfi_def_cfa_offset 12
+ 585              		.cfi_offset 4, -12
+ 586              		.cfi_offset 5, -8
+ 587              		.cfi_offset 14, -4
+ 588 0002 83B0     		sub	sp, sp, #12
+ 589              	.LCFI7:
+ 590              		.cfi_def_cfa_offset 24
+ 591 0004 0446     		mov	r4, r0
+ 592 0006 0D46     		mov	r5, r1
+ 118:Core/Src/ssd1306_font.c ****     while (*str) {
+ 593              		.loc 1 118 5 is_stmt 1 view .LVU170
+ 594              		.loc 1 118 11 is_stmt 0 view .LVU171
+ 595 0008 07E0     		b	.L46
+ 596              	.LVL54:
+ 597              	.L59:
+ 598              	.LBB11:
+ 119:Core/Src/ssd1306_font.c ****         if (*str == '\n') {
+ 120:Core/Src/ssd1306_font.c ****             cursor_x = 0;
+ 599              		.loc 1 120 13 is_stmt 1 view .LVU172
+ 600              		.loc 1 120 22 is_stmt 0 view .LVU173
+ 601 000a 204B     		ldr	r3, .L60
+ 602 000c 0022     		movs	r2, #0
+ 603 000e 1A70     		strb	r2, [r3]
+ 121:Core/Src/ssd1306_font.c ****             cursor_y += FONT_ASCII_HEIGHT;
+ 604              		.loc 1 121 13 is_stmt 1 view .LVU174
+ 605              		.loc 1 121 22 is_stmt 0 view .LVU175
+ 606 0010 1F4A     		ldr	r2, .L60+4
+ 607 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 608 0014 0C33     		adds	r3, r3, #12
+ 609 0016 1370     		strb	r3, [r2]
+ 122:Core/Src/ssd1306_font.c ****             str++;
+ 610              		.loc 1 122 13 is_stmt 1 view .LVU176
+ 611              		.loc 1 122 16 is_stmt 0 view .LVU177
+ 612 0018 0134     		adds	r4, r4, #1
+ 613              	.LVL55:
+ 123:Core/Src/ssd1306_font.c ****             continue;
+ 614              		.loc 1 123 13 is_stmt 1 view .LVU178
+ 615              	.L46:
+ 616              		.loc 1 123 13 is_stmt 0 view .LVU179
+ 617              	.LBE11:
+ 118:Core/Src/ssd1306_font.c ****         if (*str == '\n') {
+ 618              		.loc 1 118 12 is_stmt 1 view .LVU180
+ 619 001a 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 620 001c A3B3     		cbz	r3, .L45
+ 621              	.LBB12:
+ 119:Core/Src/ssd1306_font.c ****             cursor_x = 0;
+ 622              		.loc 1 119 9 view .LVU181
+ 119:Core/Src/ssd1306_font.c ****             cursor_x = 0;
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 16
+
+
+ 623              		.loc 1 119 12 is_stmt 0 view .LVU182
+ 624 001e 0A2B     		cmp	r3, #10
+ 625 0020 F3D0     		beq	.L59
+ 124:Core/Src/ssd1306_font.c ****         }
+ 125:Core/Src/ssd1306_font.c **** 
+ 126:Core/Src/ssd1306_font.c ****         uint8_t bytes;
+ 626              		.loc 1 126 9 is_stmt 1 view .LVU183
+ 127:Core/Src/ssd1306_font.c ****         uint32_t codepoint = utf8_decode(str, &bytes);
+ 627              		.loc 1 127 9 view .LVU184
+ 628              		.loc 1 127 30 is_stmt 0 view .LVU185
+ 629 0022 0DF10701 		add	r1, sp, #7
+ 630 0026 2046     		mov	r0, r4
+ 631 0028 FFF7FEFF 		bl	utf8_decode
+ 632              	.LVL56:
+ 128:Core/Src/ssd1306_font.c ****         
+ 129:Core/Src/ssd1306_font.c ****         if (bytes == 0 || codepoint == 0xFFFFFFFF) {
+ 633              		.loc 1 129 9 is_stmt 1 view .LVU186
+ 634              		.loc 1 129 19 is_stmt 0 view .LVU187
+ 635 002c 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 636              		.loc 1 129 12 view .LVU188
+ 637 0030 A3B1     		cbz	r3, .L49
+ 638              		.loc 1 129 24 discriminator 2 view .LVU189
+ 639 0032 B0F1FF3F 		cmp	r0, #-1
+ 640 0036 11D0     		beq	.L49
+ 130:Core/Src/ssd1306_font.c ****             str++;
+ 131:Core/Src/ssd1306_font.c ****             continue;
+ 132:Core/Src/ssd1306_font.c ****         }
+ 133:Core/Src/ssd1306_font.c **** 
+ 134:Core/Src/ssd1306_font.c ****         uint8_t char_width = 0;
+ 641              		.loc 1 134 9 is_stmt 1 view .LVU190
+ 642              	.LVL57:
+ 135:Core/Src/ssd1306_font.c ****         if (codepoint >= FONT_ASCII_START && codepoint <= FONT_ASCII_END) {
+ 643              		.loc 1 135 9 view .LVU191
+ 644              		.loc 1 135 43 is_stmt 0 view .LVU192
+ 645 0038 A0F12003 		sub	r3, r0, #32
+ 646              		.loc 1 135 12 view .LVU193
+ 647 003c 5E2B     		cmp	r3, #94
+ 648 003e 0FD8     		bhi	.L51
+ 136:Core/Src/ssd1306_font.c ****             char_width = font_ascii_width[codepoint - FONT_ASCII_START];
+ 649              		.loc 1 136 13 is_stmt 1 view .LVU194
+ 650              		.loc 1 136 24 is_stmt 0 view .LVU195
+ 651 0040 144A     		ldr	r2, .L60+8
+ 652 0042 D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
+ 653              	.LVL58:
+ 137:Core/Src/ssd1306_font.c ****         } else if (codepoint >= FONT_HANGUL_START && codepoint <= FONT_HANGUL_END) {
+ 138:Core/Src/ssd1306_font.c ****             char_width = FONT_HANGUL_WIDTH;
+ 139:Core/Src/ssd1306_font.c ****         }
+ 140:Core/Src/ssd1306_font.c ****         
+ 141:Core/Src/ssd1306_font.c ****         if (char_width > 0 && cursor_x + char_width > SSD1306_WIDTH) {
+ 654              		.loc 1 141 9 is_stmt 1 view .LVU196
+ 655              		.loc 1 141 12 is_stmt 0 view .LVU197
+ 656 0044 9AB9     		cbnz	r2, .L52
+ 657              	.LVL59:
+ 658              	.L53:
+ 142:Core/Src/ssd1306_font.c ****             cursor_x = 0;
+ 143:Core/Src/ssd1306_font.c ****             cursor_y += FONT_ASCII_HEIGHT;
+ 144:Core/Src/ssd1306_font.c ****         }
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 17
+
+
+ 145:Core/Src/ssd1306_font.c ****         
+ 146:Core/Src/ssd1306_font.c ****         if (cursor_y + FONT_ASCII_HEIGHT > SSD1306_HEIGHT) {
+ 659              		.loc 1 146 9 is_stmt 1 view .LVU198
+ 660              		.loc 1 146 42 is_stmt 0 view .LVU199
+ 661 0046 124B     		ldr	r3, .L60+4
+ 662 0048 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 663              		.loc 1 146 12 view .LVU200
+ 664 004a 342B     		cmp	r3, #52
+ 665 004c 1CD8     		bhi	.L45
+ 147:Core/Src/ssd1306_font.c ****             break;
+ 148:Core/Src/ssd1306_font.c ****         }
+ 149:Core/Src/ssd1306_font.c ****         
+ 150:Core/Src/ssd1306_font.c ****         SSD1306_WriteChar(codepoint, color);
+ 666              		.loc 1 150 9 is_stmt 1 view .LVU201
+ 667 004e 2946     		mov	r1, r5
+ 668 0050 FFF7FEFF 		bl	SSD1306_WriteChar
+ 669              	.LVL60:
+ 151:Core/Src/ssd1306_font.c ****         str += bytes;
+ 670              		.loc 1 151 9 view .LVU202
+ 671              		.loc 1 151 13 is_stmt 0 view .LVU203
+ 672 0054 9DF80730 		ldrb	r3, [sp, #7]	@ zero_extendqisi2
+ 673 0058 1C44     		add	r4, r4, r3
+ 674              	.LVL61:
+ 675              		.loc 1 151 13 view .LVU204
+ 676 005a DEE7     		b	.L46
+ 677              	.LVL62:
+ 678              	.L49:
+ 130:Core/Src/ssd1306_font.c ****             continue;
+ 679              		.loc 1 130 13 is_stmt 1 view .LVU205
+ 130:Core/Src/ssd1306_font.c ****             continue;
+ 680              		.loc 1 130 16 is_stmt 0 view .LVU206
+ 681 005c 0134     		adds	r4, r4, #1
+ 682              	.LVL63:
+ 131:Core/Src/ssd1306_font.c ****         }
+ 683              		.loc 1 131 13 is_stmt 1 view .LVU207
+ 684 005e DCE7     		b	.L46
+ 685              	.LVL64:
+ 686              	.L51:
+ 137:Core/Src/ssd1306_font.c ****             char_width = FONT_HANGUL_WIDTH;
+ 687              		.loc 1 137 16 view .LVU208
+ 137:Core/Src/ssd1306_font.c ****             char_width = FONT_HANGUL_WIDTH;
+ 688              		.loc 1 137 51 is_stmt 0 view .LVU209
+ 689 0060 A0F52C42 		sub	r2, r0, #44032
+ 137:Core/Src/ssd1306_font.c ****             char_width = FONT_HANGUL_WIDTH;
+ 690              		.loc 1 137 19 view .LVU210
+ 691 0064 42F6A333 		movw	r3, #11171
+ 692 0068 9A42     		cmp	r2, r3
+ 693 006a ECD8     		bhi	.L53
+ 138:Core/Src/ssd1306_font.c ****         }
+ 694              		.loc 1 138 24 view .LVU211
+ 695 006c 0C22     		movs	r2, #12
+ 696              	.LVL65:
+ 697              	.L52:
+ 141:Core/Src/ssd1306_font.c ****             cursor_x = 0;
+ 698              		.loc 1 141 40 discriminator 1 view .LVU212
+ 699 006e 074B     		ldr	r3, .L60
+ 700 0070 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 18
+
+
+ 701 0072 1344     		add	r3, r3, r2
+ 141:Core/Src/ssd1306_font.c ****             cursor_x = 0;
+ 702              		.loc 1 141 28 discriminator 1 view .LVU213
+ 703 0074 802B     		cmp	r3, #128
+ 704 0076 E6DD     		ble	.L53
+ 142:Core/Src/ssd1306_font.c ****             cursor_y += FONT_ASCII_HEIGHT;
+ 705              		.loc 1 142 13 is_stmt 1 view .LVU214
+ 142:Core/Src/ssd1306_font.c ****             cursor_y += FONT_ASCII_HEIGHT;
+ 706              		.loc 1 142 22 is_stmt 0 view .LVU215
+ 707 0078 044B     		ldr	r3, .L60
+ 708 007a 0022     		movs	r2, #0
+ 709 007c 1A70     		strb	r2, [r3]
+ 143:Core/Src/ssd1306_font.c ****         }
+ 710              		.loc 1 143 13 is_stmt 1 view .LVU216
+ 143:Core/Src/ssd1306_font.c ****         }
+ 711              		.loc 1 143 22 is_stmt 0 view .LVU217
+ 712 007e 044A     		ldr	r2, .L60+4
+ 713 0080 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 714 0082 0C33     		adds	r3, r3, #12
+ 715 0084 1370     		strb	r3, [r2]
+ 716 0086 DEE7     		b	.L53
+ 717              	.LVL66:
+ 718              	.L45:
+ 143:Core/Src/ssd1306_font.c ****         }
+ 719              		.loc 1 143 22 view .LVU218
+ 720              	.LBE12:
+ 152:Core/Src/ssd1306_font.c ****     }
+ 153:Core/Src/ssd1306_font.c **** }
+ 721              		.loc 1 153 1 view .LVU219
+ 722 0088 03B0     		add	sp, sp, #12
+ 723              	.LCFI8:
+ 724              		.cfi_def_cfa_offset 12
+ 725              		@ sp needed
+ 726 008a 30BD     		pop	{r4, r5, pc}
+ 727              	.LVL67:
+ 728              	.L61:
+ 729              		.loc 1 153 1 view .LVU220
+ 730              		.align	2
+ 731              	.L60:
+ 732 008c 00000000 		.word	cursor_x
+ 733 0090 00000000 		.word	cursor_y
+ 734 0094 00000000 		.word	font_ascii_width
+ 735              		.cfi_endproc
+ 736              	.LFE139:
+ 738              		.section	.text.SSD1306_WriteStringAt,"ax",%progbits
+ 739              		.align	1
+ 740              		.global	SSD1306_WriteStringAt
+ 741              		.syntax unified
+ 742              		.thumb
+ 743              		.thumb_func
+ 745              	SSD1306_WriteStringAt:
+ 746              	.LVL68:
+ 747              	.LFB140:
+ 154:Core/Src/ssd1306_font.c **** 
+ 155:Core/Src/ssd1306_font.c **** 
+ 156:Core/Src/ssd1306_font.c **** void SSD1306_WriteStringAt(uint8_t x, uint8_t y, const char *str, uint8_t color)
+ 157:Core/Src/ssd1306_font.c **** {
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 19
+
+
+ 748              		.loc 1 157 1 is_stmt 1 view -0
+ 749              		.cfi_startproc
+ 750              		@ args = 0, pretend = 0, frame = 0
+ 751              		@ frame_needed = 0, uses_anonymous_args = 0
+ 752              		.loc 1 157 1 is_stmt 0 view .LVU222
+ 753 0000 38B5     		push	{r3, r4, r5, lr}
+ 754              	.LCFI9:
+ 755              		.cfi_def_cfa_offset 16
+ 756              		.cfi_offset 3, -16
+ 757              		.cfi_offset 4, -12
+ 758              		.cfi_offset 5, -8
+ 759              		.cfi_offset 14, -4
+ 760 0002 1446     		mov	r4, r2
+ 761 0004 1D46     		mov	r5, r3
+ 158:Core/Src/ssd1306_font.c ****     SSD1306_SetCursor(x, y);
+ 762              		.loc 1 158 5 is_stmt 1 view .LVU223
+ 763 0006 FFF7FEFF 		bl	SSD1306_SetCursor
+ 764              	.LVL69:
+ 159:Core/Src/ssd1306_font.c ****     SSD1306_WriteString(str, color);
+ 765              		.loc 1 159 5 view .LVU224
+ 766 000a 2946     		mov	r1, r5
+ 767 000c 2046     		mov	r0, r4
+ 768 000e FFF7FEFF 		bl	SSD1306_WriteString
+ 769              	.LVL70:
+ 160:Core/Src/ssd1306_font.c **** }
+ 770              		.loc 1 160 1 is_stmt 0 view .LVU225
+ 771 0012 38BD     		pop	{r3, r4, r5, pc}
+ 772              		.loc 1 160 1 view .LVU226
+ 773              		.cfi_endproc
+ 774              	.LFE140:
+ 776              		.section	.bss.cursor_y,"aw",%nobits
+ 779              	cursor_y:
+ 780 0000 00       		.space	1
+ 781              		.section	.bss.cursor_x,"aw",%nobits
+ 784              	cursor_x:
+ 785 0000 00       		.space	1
+ 786              		.text
+ 787              	.Letext0:
+ 788              		.file 2 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
+ 789              		.file 3 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
+ 790              		.file 4 "Core/Inc/font_ascii.h"
+ 791              		.file 5 "Core/Inc/font_hangul.h"
+ 792              		.file 6 "Core/Inc/ssd1306.h"
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 20
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ssd1306_font.c
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:21     .text.utf8_decode:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:26     .text.utf8_decode:00000000 utf8_decode
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:184    .text.SSD1306_DrawGlyph:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:189    .text.SSD1306_DrawGlyph:00000000 SSD1306_DrawGlyph
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:337    .text.SSD1306_SetCursor:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:343    .text.SSD1306_SetCursor:00000000 SSD1306_SetCursor
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:364    .text.SSD1306_SetCursor:0000000c $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:784    .bss.cursor_x:00000000 cursor_x
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:779    .bss.cursor_y:00000000 cursor_y
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:370    .text.SSD1306_GetCursor:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:376    .text.SSD1306_GetCursor:00000000 SSD1306_GetCursor
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:407    .text.SSD1306_GetCursor:00000014 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:413    .text.SSD1306_WriteChar:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:419    .text.SSD1306_WriteChar:00000000 SSD1306_WriteChar
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:559    .text.SSD1306_WriteChar:0000007c $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:568    .text.SSD1306_WriteString:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:574    .text.SSD1306_WriteString:00000000 SSD1306_WriteString
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:732    .text.SSD1306_WriteString:0000008c $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:739    .text.SSD1306_WriteStringAt:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:745    .text.SSD1306_WriteStringAt:00000000 SSD1306_WriteStringAt
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:780    .bss.cursor_y:00000000 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:785    .bss.cursor_x:00000000 $d
+
+UNDEFINED SYMBOLS
+SSD1306_DrawPixel
+font_ascii_data
+font_ascii_width
+font_hangul_data
