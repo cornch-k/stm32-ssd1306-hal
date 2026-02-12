@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
   35      00100000 
   35      00
   36 0078 00006080 		.ascii	"\000\000`\200\221\000\222\000d\000\010\000\023\000$"
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 2
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 2
 
 
   36      91009200 
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
   52      00000000 
   52      0000F800 
   52      00
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 3
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 3
 
 
   53 0145 00000000 		.ascii	"\000\000\000\000\000\000\000\000\000\000\000"
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
   69      000000
   70 0210 18002000 		.ascii	"\030\000 \000@\000@\000\270\000\304\000\202\000\202"
   70      40004000 
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 4
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 4
 
 
   70      B800C400 
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
   86      20001000 
   86      20004000 
   87 02e0 80000000 		.ascii	"\200\000\000\000\000\000\000\000"
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 5
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 5
 
 
   87      00000000 
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  103      00800080 
  103      000000
  104 03a8 3C004200 		.ascii	"<\000B\000\201\000\200\000\200\000\217\000\201\000\201"
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 6
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 6
 
 
  104      81008000 
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  120 0468 3C004200 		.ascii	"<\000B\000\201\000\201\000\201\000\201\000\201\000\201"
  120      81008100 
  120      81008100 
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 7
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 7
 
 
  120      810081
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  136      55005500 
  136      55005500 
  137 0538 22002200 		.ascii	"\"\000\"\000\"\000\000\000"
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 8
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 8
 
 
  137      22000000 
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  153      000000
  154 0600 80004000 		.ascii	"\200\000@\000 \000\000\000\000\000\000\000\000\000\000"
  154      20000000 
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 9
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 9
 
 
  154      00000000 
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  170 06c0 80008000 		.ascii	"\200\000\200\000\200\000\270\000\304\000\204\000\204"
  170      8000B800 
  170      C4008400 
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 10
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 10
 
 
  170      84
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  186      C4008200 
  186      82
  187 078d 00820082 		.ascii	"\000\202\000\202\000\304\000\270\000\200\000"
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 11
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 11
 
 
  187      00C400B8 
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  202      100010
  203 084f 00280044 		.ascii	"\000(\000D\000\202\000\000\000"
  203      00820000 
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 12
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 12
 
 
  203      00
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  224      05060A08 
  224      08090807 
  224      07
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 13
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 13
 
 
  225 0027 09080407 		.ascii	"\011\010\004\007\010\007\012\010\011\010\011\010\010"
@@ -743,14 +743,14 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 1
  232              		.file 2 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
  233              		.file 3 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
  234              		.file 4 "Core/Inc/font_ascii.h"
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s 			page 14
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 font_ascii.c
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s:25     .rodata.font_ascii_data:00000000 font_ascii_data
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s:22     .rodata.font_ascii_data:00000000 $d
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s:221    .rodata.font_ascii_width:00000000 font_ascii_width
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccrTD8v8.s:218    .rodata.font_ascii_width:00000000 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s:25     .rodata.font_ascii_data:00000000 font_ascii_data
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s:22     .rodata.font_ascii_data:00000000 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s:221    .rodata.font_ascii_width:00000000 font_ascii_width
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccclunSE.s:218    .rodata.font_ascii_width:00000000 $d
 
 NO UNDEFINED SYMBOLS

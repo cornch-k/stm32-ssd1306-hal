@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "ssd1306.h"
 #include "ssd1306_font.h"
+#include "makeqrcode.h"
 #include "usart.h"
 #include <stdio.h>
 #include <string.h>
@@ -127,40 +128,44 @@ void StartDefaultTask(void *argument)
   SSD1306_SetCursor(0, 0);
   SSD1306_UpdateScreen();
   osDelay(100);
-
+  
   idleCount = 0;
   osDelay(CPU_MEASURE_PERIOD_MS);
   idleCountMax = idleCount;
   idleCount = 0;
-
+  
   char buff[32];
   uint32_t prevTick = osKernelGetTickCount();
+  
+  createQR();
+  renderQR(20, 0);
+  SSD1306_UpdateScreen();
   /* Infinite loop */
   for(;;)
   {
-    idleCount = 0;
+    // idleCount = 0;
 
-    SSD1306_Fill(0);
-    sprintf(buff, "CPU: %.1f %%", cpuUsage);
-    SSD1306_SetCursor(0, 0);
-    SSD1306_WriteString(buff, 1);
+    // SSD1306_Fill(0);
+    // sprintf(buff, "CPU: %.1f %%", cpuUsage);
+    // SSD1306_SetCursor(0, 0);
+    // SSD1306_WriteString(buff, 1);
 
-    sprintf(buff, "Max: %lu", idleCountMax);
-    SSD1306_SetCursor(0, 20);
-    SSD1306_WriteString(buff, 1);
+    // sprintf(buff, "Max: %lu", idleCountMax);
+    // SSD1306_SetCursor(0, 20);
+    // SSD1306_WriteString(buff, 1);
 
-    SSD1306_UpdateScreen();
+    // SSD1306_UpdateScreen();
 
-    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+    // HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 
-    prevTick += CPU_MEASURE_PERIOD_MS;
-    osDelayUntil(prevTick);
+    // prevTick += CPU_MEASURE_PERIOD_MS;
+    // osDelayUntil(prevTick);
 
-    if(idleCountMax > 0)
-    {
-      cpuUsage = 100.0f - ((float)idleCount / (float)idleCountMax * 100.0f);
-      if(cpuUsage < 0) cpuUsage = 0;
-    }
+    // if(idleCountMax > 0)
+    // {
+    //   cpuUsage = 100.0f - ((float)idleCount / (float)idleCountMax * 100.0f);
+    //   if(cpuUsage < 0) cpuUsage = 0;
+    // }
   }
   /* USER CODE END StartDefaultTask */
 }

@@ -46,6 +46,8 @@ Core/Src/font_ascii.c \
 Core/Src/font_hangul.c \
 Core/Src/ssd1306_font.c \
 Core/Src/ssd1306.c \
+Core/Src/makeqrcode.c \
+Core/Src/qrcodegen.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \

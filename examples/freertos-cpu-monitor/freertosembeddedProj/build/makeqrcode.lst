@@ -1,0 +1,388 @@
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"makeqrcode.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/makeqrcode.c"
+  20              		.section	.rodata.createQR.str1.4,"aMS",%progbits,1
+  21              		.align	2
+  22              	.LC0:
+  23 0000 68747470 		.ascii	"https://github.com/cornch-k\000"
+  23      733A2F2F 
+  23      67697468 
+  23      75622E63 
+  23      6F6D2F63 
+  24              		.section	.text.createQR,"ax",%progbits
+  25              		.align	1
+  26              		.global	createQR
+  27              		.syntax unified
+  28              		.thumb
+  29              		.thumb_func
+  31              	createQR:
+  32              	.LFB134:
+   1:Core/Src/makeqrcode.c **** #include "stdbool.h"
+   2:Core/Src/makeqrcode.c **** #include "stdint.h"
+   3:Core/Src/makeqrcode.c **** #include "qrcodegen.h"
+   4:Core/Src/makeqrcode.c **** #include "ssd1306.h"
+   5:Core/Src/makeqrcode.c **** 
+   6:Core/Src/makeqrcode.c **** static uint8_t qr0[qrcodegen_BUFFER_LEN_MAX];
+   7:Core/Src/makeqrcode.c **** static uint8_t tempBuffer[qrcodegen_BUFFER_LEN_MAX];
+   8:Core/Src/makeqrcode.c **** 
+   9:Core/Src/makeqrcode.c **** 
+  10:Core/Src/makeqrcode.c **** 
+  11:Core/Src/makeqrcode.c **** void createQR(void){
+  33              		.loc 1 11 20 view -0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37 0000 00B5     		push	{lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 4
+  40              		.cfi_offset 14, -4
+  41 0002 85B0     		sub	sp, sp, #20
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 24
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s 			page 2
+
+
+  12:Core/Src/makeqrcode.c ****     bool myProfile = qrcodegen_encodeText(
+  44              		.loc 1 12 5 view .LVU1
+  45              		.loc 1 12 22 is_stmt 0 view .LVU2
+  46 0004 0123     		movs	r3, #1
+  47 0006 0393     		str	r3, [sp, #12]
+  48 0008 4FF0FF32 		mov	r2, #-1
+  49 000c 0292     		str	r2, [sp, #8]
+  50 000e 2822     		movs	r2, #40
+  51 0010 0192     		str	r2, [sp, #4]
+  52 0012 0093     		str	r3, [sp]
+  53 0014 034A     		ldr	r2, .L3
+  54 0016 0449     		ldr	r1, .L3+4
+  55 0018 0448     		ldr	r0, .L3+8
+  56 001a FFF7FEFF 		bl	qrcodegen_encodeText
+  57              	.LVL0:
+  13:Core/Src/makeqrcode.c ****         "https://github.com/cornch-k",
+  14:Core/Src/makeqrcode.c ****         tempBuffer,
+  15:Core/Src/makeqrcode.c ****         qr0,
+  16:Core/Src/makeqrcode.c ****         qrcodegen_Ecc_MEDIUM,
+  17:Core/Src/makeqrcode.c ****         qrcodegen_VERSION_MIN,
+  18:Core/Src/makeqrcode.c ****         qrcodegen_VERSION_MAX,
+  19:Core/Src/makeqrcode.c ****         qrcodegen_Mask_AUTO,
+  20:Core/Src/makeqrcode.c ****         true
+  21:Core/Src/makeqrcode.c ****     );
+  22:Core/Src/makeqrcode.c **** 
+  23:Core/Src/makeqrcode.c ****     if(!myProfile) return;
+  58              		.loc 1 23 5 is_stmt 1 view .LVU3
+  59              		.loc 1 23 20 discriminator 1 view .LVU4
+  24:Core/Src/makeqrcode.c **** }
+  60              		.loc 1 24 1 is_stmt 0 view .LVU5
+  61 001e 05B0     		add	sp, sp, #20
+  62              	.LCFI2:
+  63              		.cfi_def_cfa_offset 4
+  64              		@ sp needed
+  65 0020 5DF804FB 		ldr	pc, [sp], #4
+  66              	.L4:
+  67              		.align	2
+  68              	.L3:
+  69 0024 00000000 		.word	qr0
+  70 0028 00000000 		.word	tempBuffer
+  71 002c 00000000 		.word	.LC0
+  72              		.cfi_endproc
+  73              	.LFE134:
+  75              		.section	.text.renderQR,"ax",%progbits
+  76              		.align	1
+  77              		.global	renderQR
+  78              		.syntax unified
+  79              		.thumb
+  80              		.thumb_func
+  82              	renderQR:
+  83              	.LVL1:
+  84              	.LFB135:
+  25:Core/Src/makeqrcode.c **** 
+  26:Core/Src/makeqrcode.c **** void renderQR(uint8_t startX, uint8_t startY){
+  85              		.loc 1 26 46 is_stmt 1 view -0
+  86              		.cfi_startproc
+  87              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s 			page 3
+
+
+  88              		@ frame_needed = 0, uses_anonymous_args = 0
+  89              		.loc 1 26 46 is_stmt 0 view .LVU7
+  90 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  91              	.LCFI3:
+  92              		.cfi_def_cfa_offset 32
+  93              		.cfi_offset 4, -32
+  94              		.cfi_offset 5, -28
+  95              		.cfi_offset 6, -24
+  96              		.cfi_offset 7, -20
+  97              		.cfi_offset 8, -16
+  98              		.cfi_offset 9, -12
+  99              		.cfi_offset 10, -8
+ 100              		.cfi_offset 14, -4
+ 101 0004 8046     		mov	r8, r0
+ 102 0006 0F46     		mov	r7, r1
+  27:Core/Src/makeqrcode.c ****     int size = qrcodegen_getSize(qr0);
+ 103              		.loc 1 27 5 is_stmt 1 view .LVU8
+ 104              		.loc 1 27 16 is_stmt 0 view .LVU9
+ 105 0008 2248     		ldr	r0, .L23
+ 106              	.LVL2:
+ 107              		.loc 1 27 16 view .LVU10
+ 108 000a FFF7FEFF 		bl	qrcodegen_getSize
+ 109              	.LVL3:
+ 110              		.loc 1 27 16 view .LVU11
+ 111 000e 8146     		mov	r9, r0
+ 112              	.LVL4:
+  28:Core/Src/makeqrcode.c ****     int scale = 2;
+ 113              		.loc 1 28 5 is_stmt 1 view .LVU12
+  29:Core/Src/makeqrcode.c ****     for(int y = 0; y < size; y++){
+ 114              		.loc 1 29 5 view .LVU13
+ 115              	.LBB2:
+ 116              		.loc 1 29 9 view .LVU14
+ 117              		.loc 1 29 13 is_stmt 0 view .LVU15
+ 118 0010 0026     		movs	r6, #0
+ 119              		.loc 1 29 5 view .LVU16
+ 120 0012 36E0     		b	.L6
+ 121              	.LVL5:
+ 122              	.L9:
+ 123              	.LBB3:
+ 124              	.LBB4:
+ 125              	.LBB5:
+  30:Core/Src/makeqrcode.c ****         for(int x = 0; x < size; x++){
+  31:Core/Src/makeqrcode.c ****             if(qrcodegen_getModule(qr0, x, y)){
+  32:Core/Src/makeqrcode.c ****                 for(int dy = 0; dy < scale; dy++){
+  33:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+  34:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 1);
+ 126              		.loc 1 34 25 is_stmt 1 view .LVU17
+ 127 0014 07EB4601 		add	r1, r7, r6, lsl #1
+ 128 0018 08EB4400 		add	r0, r8, r4, lsl #1
+ 129 001c 0122     		movs	r2, #1
+ 130 001e C9B2     		uxtb	r1, r1
+ 131 0020 C0B2     		uxtb	r0, r0
+ 132 0022 FFF7FEFF 		bl	SSD1306_DrawPixel
+ 133              	.LVL6:
+  33:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 1);
+ 134              		.loc 1 33 51 discriminator 3 view .LVU18
+ 135 0026 0135     		adds	r5, r5, #1
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s 			page 4
+
+
+ 136              	.LVL7:
+ 137              	.L10:
+  33:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 1);
+ 138              		.loc 1 33 40 discriminator 1 view .LVU19
+ 139 0028 012D     		cmp	r5, #1
+ 140 002a F3DD     		ble	.L9
+ 141              	.LBE5:
+  32:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+ 142              		.loc 1 32 47 discriminator 2 view .LVU20
+ 143 002c 0AF1010A 		add	r10, r10, #1
+ 144              	.LVL8:
+ 145              	.L7:
+  32:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+ 146              		.loc 1 32 36 discriminator 1 view .LVU21
+ 147 0030 BAF1010F 		cmp	r10, #1
+ 148 0034 17DC     		bgt	.L11
+ 149              	.LBB6:
+  33:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 1);
+ 150              		.loc 1 33 29 is_stmt 0 view .LVU22
+ 151 0036 0025     		movs	r5, #0
+ 152 0038 F6E7     		b	.L10
+ 153              	.LVL9:
+ 154              	.L16:
+  33:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 1);
+ 155              		.loc 1 33 29 view .LVU23
+ 156              	.LBE6:
+  32:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+ 157              		.loc 1 32 25 view .LVU24
+ 158 003a 4FF0000A 		mov	r10, #0
+ 159 003e F7E7     		b	.L7
+ 160              	.LVL10:
+ 161              	.L12:
+  32:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+ 162              		.loc 1 32 25 view .LVU25
+ 163              	.LBE4:
+ 164              	.LBB7:
+ 165              	.LBB8:
+  35:Core/Src/makeqrcode.c ****                     }
+  36:Core/Src/makeqrcode.c ****                 }
+  37:Core/Src/makeqrcode.c ****             }
+  38:Core/Src/makeqrcode.c ****             else {
+  39:Core/Src/makeqrcode.c ****                 for(int dy = 0; dy < scale; dy++){
+  40:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+  41:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 0);
+ 166              		.loc 1 41 25 is_stmt 1 view .LVU26
+ 167 0040 07EB4601 		add	r1, r7, r6, lsl #1
+ 168 0044 08EB4400 		add	r0, r8, r4, lsl #1
+ 169 0048 0022     		movs	r2, #0
+ 170 004a C9B2     		uxtb	r1, r1
+ 171 004c C0B2     		uxtb	r0, r0
+ 172 004e FFF7FEFF 		bl	SSD1306_DrawPixel
+ 173              	.LVL11:
+  40:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 0);
+ 174              		.loc 1 40 51 discriminator 3 view .LVU27
+ 175 0052 0135     		adds	r5, r5, #1
+ 176              	.LVL12:
+ 177              	.L13:
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s 			page 5
+
+
+  40:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 0);
+ 178              		.loc 1 40 40 discriminator 1 view .LVU28
+ 179 0054 012D     		cmp	r5, #1
+ 180 0056 F3DD     		ble	.L12
+ 181              	.LBE8:
+  39:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+ 182              		.loc 1 39 47 discriminator 2 view .LVU29
+ 183 0058 0AF1010A 		add	r10, r10, #1
+ 184              	.LVL13:
+ 185              	.L8:
+  39:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+ 186              		.loc 1 39 36 discriminator 1 view .LVU30
+ 187 005c BAF1010F 		cmp	r10, #1
+ 188 0060 01DC     		bgt	.L11
+ 189              	.LBB9:
+  40:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 0);
+ 190              		.loc 1 40 29 is_stmt 0 view .LVU31
+ 191 0062 0025     		movs	r5, #0
+ 192 0064 F6E7     		b	.L13
+ 193              	.LVL14:
+ 194              	.L11:
+  40:Core/Src/makeqrcode.c ****                         SSD1306_DrawPixel(startX+(x*scale), startY+(y*scale), 0);
+ 195              		.loc 1 40 29 view .LVU32
+ 196              	.LBE9:
+ 197              	.LBE7:
+  30:Core/Src/makeqrcode.c ****             if(qrcodegen_getModule(qr0, x, y)){
+ 198              		.loc 1 30 35 is_stmt 1 discriminator 2 view .LVU33
+ 199 0066 0134     		adds	r4, r4, #1
+ 200              	.LVL15:
+ 201              	.L15:
+  30:Core/Src/makeqrcode.c ****             if(qrcodegen_getModule(qr0, x, y)){
+ 202              		.loc 1 30 26 discriminator 1 view .LVU34
+ 203 0068 4C45     		cmp	r4, r9
+ 204 006a 09DA     		bge	.L21
+  31:Core/Src/makeqrcode.c ****                 for(int dy = 0; dy < scale; dy++){
+ 205              		.loc 1 31 13 view .LVU35
+  31:Core/Src/makeqrcode.c ****                 for(int dy = 0; dy < scale; dy++){
+ 206              		.loc 1 31 16 is_stmt 0 view .LVU36
+ 207 006c 3246     		mov	r2, r6
+ 208 006e 2146     		mov	r1, r4
+ 209 0070 0848     		ldr	r0, .L23
+ 210 0072 FFF7FEFF 		bl	qrcodegen_getModule
+ 211              	.LVL16:
+  31:Core/Src/makeqrcode.c ****                 for(int dy = 0; dy < scale; dy++){
+ 212              		.loc 1 31 15 discriminator 1 view .LVU37
+ 213 0076 0028     		cmp	r0, #0
+ 214 0078 DFD1     		bne	.L16
+ 215              	.LBB10:
+  39:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+ 216              		.loc 1 39 25 view .LVU38
+ 217 007a 4FF0000A 		mov	r10, #0
+ 218 007e EDE7     		b	.L8
+ 219              	.L21:
+  39:Core/Src/makeqrcode.c ****                     for(int dx = 0; dx < scale; dx++){
+ 220              		.loc 1 39 25 view .LVU39
+ 221              	.LBE10:
+ 222              	.LBE3:
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s 			page 6
+
+
+  29:Core/Src/makeqrcode.c ****         for(int x = 0; x < size; x++){
+ 223              		.loc 1 29 31 is_stmt 1 discriminator 2 view .LVU40
+ 224 0080 0136     		adds	r6, r6, #1
+ 225              	.LVL17:
+ 226              	.L6:
+  29:Core/Src/makeqrcode.c ****         for(int x = 0; x < size; x++){
+ 227              		.loc 1 29 22 discriminator 1 view .LVU41
+ 228 0082 4E45     		cmp	r6, r9
+ 229 0084 01DA     		bge	.L22
+ 230              	.LBB11:
+  30:Core/Src/makeqrcode.c ****             if(qrcodegen_getModule(qr0, x, y)){
+ 231              		.loc 1 30 17 is_stmt 0 view .LVU42
+ 232 0086 0024     		movs	r4, #0
+ 233 0088 EEE7     		b	.L15
+ 234              	.L22:
+ 235              	.LBE11:
+ 236              	.LBE2:
+  42:Core/Src/makeqrcode.c ****                     }
+  43:Core/Src/makeqrcode.c ****                 }
+  44:Core/Src/makeqrcode.c ****             }
+  45:Core/Src/makeqrcode.c ****         }
+  46:Core/Src/makeqrcode.c ****     }
+  47:Core/Src/makeqrcode.c ****     SSD1306_UpdateScreen();
+ 237              		.loc 1 47 5 is_stmt 1 view .LVU43
+ 238 008a FFF7FEFF 		bl	SSD1306_UpdateScreen
+ 239              	.LVL18:
+  48:Core/Src/makeqrcode.c **** }...
+ 240              		.loc 1 48 1 is_stmt 0 view .LVU44
+ 241 008e BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 242              	.LVL19:
+ 243              	.L24:
+ 244              		.loc 1 48 1 view .LVU45
+ 245 0092 00BF     		.align	2
+ 246              	.L23:
+ 247 0094 00000000 		.word	qr0
+ 248              		.cfi_endproc
+ 249              	.LFE135:
+ 251              		.section	.bss.tempBuffer,"aw",%nobits
+ 252              		.align	2
+ 255              	tempBuffer:
+ 256 0000 00000000 		.space	3918
+ 256      00000000 
+ 256      00000000 
+ 256      00000000 
+ 256      00000000 
+ 257              		.section	.bss.qr0,"aw",%nobits
+ 258              		.align	2
+ 261              	qr0:
+ 262 0000 00000000 		.space	3918
+ 262      00000000 
+ 262      00000000 
+ 262      00000000 
+ 262      00000000 
+ 263              		.text
+ 264              	.Letext0:
+ 265              		.file 2 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
+ 266              		.file 3 "/Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.external
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s 			page 7
+
+
+ 267              		.file 4 "Core/Inc/qrcodegen.h"
+ 268              		.file 5 "Core/Inc/ssd1306.h"
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 makeqrcode.c
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:21     .rodata.createQR.str1.4:00000000 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:25     .text.createQR:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:31     .text.createQR:00000000 createQR
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:69     .text.createQR:00000024 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:261    .bss.qr0:00000000 qr0
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:255    .bss.tempBuffer:00000000 tempBuffer
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:76     .text.renderQR:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:82     .text.renderQR:00000000 renderQR
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:247    .text.renderQR:00000094 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:252    .bss.tempBuffer:00000000 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccJ9aPAn.s:258    .bss.qr0:00000000 $d
+
+UNDEFINED SYMBOLS
+qrcodegen_encodeText
+qrcodegen_getSize
+SSD1306_DrawPixel
+qrcodegen_getModule
+SSD1306_UpdateScreen

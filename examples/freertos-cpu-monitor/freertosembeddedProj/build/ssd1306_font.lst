@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
   28:Core/Src/ssd1306_font.c ****             uint8_t pixel;
   29:Core/Src/ssd1306_font.c ****             if (col < 8) {
   30:Core/Src/ssd1306_font.c ****                 pixel = (byte_hi >> (7 - col)) & 1;
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 2
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 2
 
 
   31:Core/Src/ssd1306_font.c ****             } else {
@@ -118,7 +118,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
   52 0012 03F0F002 		and	r2, r3, #240
   53 0016 E02A     		cmp	r2, #224
   54 0018 1AD0     		beq	.L11
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 3
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 3
 
 
   62:Core/Src/ssd1306_font.c ****         *bytes_consumed = 3;
@@ -178,7 +178,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
   86              		.loc 1 52 9 is_stmt 1 view .LVU24
   52:Core/Src/ssd1306_font.c ****         return c;
   87              		.loc 1 52 25 is_stmt 0 view .LVU25
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 4
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 4
 
 
   88 0032 0122     		movs	r2, #1
@@ -238,7 +238,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  126              	.LVL13:
   63:Core/Src/ssd1306_font.c ****                (((uint8_t)str[1] & 0x3F) << 6) | 
  127              		.loc 1 63 28 view .LVU42
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 5
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 5
 
 
  128 0056 9BB2     		uxth	r3, r3
@@ -298,7 +298,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
   72:Core/Src/ssd1306_font.c ****                ((uint8_t)str[3] & 0x3F);
  166              		.loc 1 72 42 view .LVU59
  167 0084 9201     		lsls	r2, r2, #6
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 6
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 6
 
 
  168 0086 02F47C62 		and	r2, r2, #4032
@@ -358,7 +358,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
   23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
  217              		.loc 1 23 5 is_stmt 1 view .LVU67
  218              	.LBB2:
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 7
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 7
 
 
   23:Core/Src/ssd1306_font.c ****         uint8_t byte_hi = data[row * 2];
@@ -418,7 +418,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  258              		.loc 1 29 13 view .LVU82
   29:Core/Src/ssd1306_font.c ****                 pixel = (byte_hi >> (7 - col)) & 1;
  259              		.loc 1 29 16 is_stmt 0 view .LVU83
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 8
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 8
 
 
  260 002c 072C     		cmp	r4, #7
@@ -478,7 +478,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  301              		.loc 1 24 36 is_stmt 0 view .LVU96
  302 005a 6B00     		lsls	r3, r5, #1
   24:Core/Src/ssd1306_font.c ****         uint8_t byte_lo = data[row * 2 + 1];
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 9
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 9
 
 
  303              		.loc 1 24 17 view .LVU97
@@ -538,7 +538,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  348              		@ args = 0, pretend = 0, frame = 0
  349              		@ frame_needed = 0, uses_anonymous_args = 0
  350              		@ link register save eliminated.
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 10
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 10
 
 
   10:Core/Src/ssd1306_font.c ****     cursor_y = y;
@@ -598,7 +598,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  395 0008 11B1     		cbz	r1, .L29
   17:Core/Src/ssd1306_font.c **** }
  396              		.loc 1 17 12 is_stmt 1 discriminator 1 view .LVU121
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 11
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 11
 
 
   17:Core/Src/ssd1306_font.c **** }
@@ -658,7 +658,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  443 000a 16D8     		bhi	.L35
  444              	.LBB9:
   87:Core/Src/ssd1306_font.c ****         uint8_t idx = codepoint - FONT_ASCII_START;
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 12
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 12
 
 
  445              		.loc 1 87 9 is_stmt 1 view .LVU131
@@ -718,7 +718,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  481 0032 342A     		cmp	r2, #52
  482 0034 12D9     		bls	.L42
  106:Core/Src/ssd1306_font.c ****         return 0;
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 13
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 13
 
 
  483              		.loc 1 106 16 view .LVU146
@@ -778,7 +778,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  523 005e 2346     		mov	r3, r4
  524 0060 6146     		mov	r1, ip
  525              	.LVL48:
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 14
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 14
 
 
  526              		.loc 1 109 5 is_stmt 0 view .LVU160
@@ -838,7 +838,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  576              	.LFB139:
  114:Core/Src/ssd1306_font.c **** 
  115:Core/Src/ssd1306_font.c **** 
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 15
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 15
 
 
  116:Core/Src/ssd1306_font.c **** void SSD1306_WriteString(const char *str, uint8_t color)
@@ -898,7 +898,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  119:Core/Src/ssd1306_font.c ****             cursor_x = 0;
  622              		.loc 1 119 9 view .LVU181
  119:Core/Src/ssd1306_font.c ****             cursor_x = 0;
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 16
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 16
 
 
  623              		.loc 1 119 12 is_stmt 0 view .LVU182
@@ -958,7 +958,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  142:Core/Src/ssd1306_font.c ****             cursor_x = 0;
  143:Core/Src/ssd1306_font.c ****             cursor_y += FONT_ASCII_HEIGHT;
  144:Core/Src/ssd1306_font.c ****         }
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 17
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 17
 
 
  145:Core/Src/ssd1306_font.c ****         
@@ -1018,7 +1018,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  698              		.loc 1 141 40 discriminator 1 view .LVU212
  699 006e 074B     		ldr	r3, .L60
  700 0070 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 18
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 18
 
 
  701 0072 1344     		add	r3, r3, r2
@@ -1078,7 +1078,7 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  155:Core/Src/ssd1306_font.c **** 
  156:Core/Src/ssd1306_font.c **** void SSD1306_WriteStringAt(uint8_t x, uint8_t y, const char *str, uint8_t color)
  157:Core/Src/ssd1306_font.c **** {
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 19
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 19
 
 
  748              		.loc 1 157 1 is_stmt 1 view -0
@@ -1124,33 +1124,33 @@ ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 1
  790              		.file 4 "Core/Inc/font_ascii.h"
  791              		.file 5 "Core/Inc/font_hangul.h"
  792              		.file 6 "Core/Inc/ssd1306.h"
-ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s 			page 20
+ARM GAS  /var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ssd1306_font.c
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:21     .text.utf8_decode:00000000 $t
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:26     .text.utf8_decode:00000000 utf8_decode
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:184    .text.SSD1306_DrawGlyph:00000000 $t
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:189    .text.SSD1306_DrawGlyph:00000000 SSD1306_DrawGlyph
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:337    .text.SSD1306_SetCursor:00000000 $t
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:343    .text.SSD1306_SetCursor:00000000 SSD1306_SetCursor
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:364    .text.SSD1306_SetCursor:0000000c $d
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:784    .bss.cursor_x:00000000 cursor_x
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:779    .bss.cursor_y:00000000 cursor_y
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:370    .text.SSD1306_GetCursor:00000000 $t
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:376    .text.SSD1306_GetCursor:00000000 SSD1306_GetCursor
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:407    .text.SSD1306_GetCursor:00000014 $d
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:413    .text.SSD1306_WriteChar:00000000 $t
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:419    .text.SSD1306_WriteChar:00000000 SSD1306_WriteChar
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:559    .text.SSD1306_WriteChar:0000007c $d
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:568    .text.SSD1306_WriteString:00000000 $t
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:574    .text.SSD1306_WriteString:00000000 SSD1306_WriteString
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:732    .text.SSD1306_WriteString:0000008c $d
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:739    .text.SSD1306_WriteStringAt:00000000 $t
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:745    .text.SSD1306_WriteStringAt:00000000 SSD1306_WriteStringAt
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:780    .bss.cursor_y:00000000 $d
-/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//cccBvwWZ.s:785    .bss.cursor_x:00000000 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:21     .text.utf8_decode:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:26     .text.utf8_decode:00000000 utf8_decode
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:184    .text.SSD1306_DrawGlyph:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:189    .text.SSD1306_DrawGlyph:00000000 SSD1306_DrawGlyph
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:337    .text.SSD1306_SetCursor:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:343    .text.SSD1306_SetCursor:00000000 SSD1306_SetCursor
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:364    .text.SSD1306_SetCursor:0000000c $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:784    .bss.cursor_x:00000000 cursor_x
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:779    .bss.cursor_y:00000000 cursor_y
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:370    .text.SSD1306_GetCursor:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:376    .text.SSD1306_GetCursor:00000000 SSD1306_GetCursor
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:407    .text.SSD1306_GetCursor:00000014 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:413    .text.SSD1306_WriteChar:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:419    .text.SSD1306_WriteChar:00000000 SSD1306_WriteChar
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:559    .text.SSD1306_WriteChar:0000007c $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:568    .text.SSD1306_WriteString:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:574    .text.SSD1306_WriteString:00000000 SSD1306_WriteString
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:732    .text.SSD1306_WriteString:0000008c $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:739    .text.SSD1306_WriteStringAt:00000000 $t
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:745    .text.SSD1306_WriteStringAt:00000000 SSD1306_WriteStringAt
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:780    .bss.cursor_y:00000000 $d
+/var/folders/0v/t9z_0lmj7rg_7k19_3xv9hqr0000gn/T//ccybGWgM.s:785    .bss.cursor_x:00000000 $d
 
 UNDEFINED SYMBOLS
 SSD1306_DrawPixel
